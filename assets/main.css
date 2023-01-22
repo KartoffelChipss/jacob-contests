@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;500;600;700;800&display=swap');
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
+:root {
+    --main-color-1: #9761EC;
+    --main-color-2: #0088F5;
+    --secondary-color-1: #4A4453;
+    --secondary-color-2: #858486;
+    --grey: #36393f;
+    --white: #f5f5f5;
+    --background-color: #36393f;
+    --font-color: #e0e0e0;
+}
+
+::-moz-selection { /* For Firefox*/
+    color: #f5f5f5;
+    background: var(--main-color-2);
+}
+
+::selection {
+  color: #f5f5f5;
+  background: var(--main-color-2);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: larger;
+    line-height: 1.0;
+    height: 100vh;
+    width: 100%;
+
+    color: var(--font-color);
+    background-color: var(--background-color);
+}
+
+p {
+    font-size: 14px;
+    color: var(--font-color);
+}
+
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #333333;
+    transition: opacity 0.75s, visibility 0.75s;
+    transform: scaleX(1);
+}
+
+.loader--hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader::after {
+    content: "";
+    width: 75px;
+    height: 75px;
+    border: 15px solid transparent;
+    border-top-color: var(--main-color-1);
+    border-radius: 50%;
+    animation: loading 0.75s ease infinite;
+}
+
+@keyframes loading {
+    from {
+        transform: rotate(0turn);
+    }
+
+    to {
+        transform: rotate(1turn);
+    }
+}
+
+
+.outer-main {
+    display: flex;
+    justify-content: center;
+}
+
+main.mainPage {
+    max-width: 1500px;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+main.mainPage .titleBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+main.mainPage .titleBox h1 {
+    font-size: 37px;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: #858486 5px solid;
+}
+
+main.mainPage .titleBox p {
+    font-size: 18px;
+}
+
+main.mainPage .titleBox .typesBox {
+    background-color: #292929;
+    border-radius: 13px;
+    padding: 10px;
+}
+
+main.mainPage .titleBox .typesBox button {
+    background-color: transparent;
+    border: none;
+    border-radius: 13px;
+    padding: 2.5px;
+    transition: all .1s ease-in-out;
+}
+
+main.mainPage .titleBox .typesBox button.active {
+    background-color: #8584867e;
+}
+
+main.mainPage .titleBox .typesBox button.inactive {
+    filter: opacity(40%);
+}
+
+main.mainPage .titleBox .typesBox button img {
+    height: 50px;
+    aspect-ratio: 1/1;
+}
+
+main.mainPage .contestsBox {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 65%;
+    margin-top: 65px;
+}
+
+main.mainPage .contestsBox .contest {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #292929;
+    border-radius: 13px;
+    padding: 10px;
+    margin-top: 15px;
+}
+
+main.mainPage .contestsBox .contest p {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+main.mainPage .contestsBox .contest .crops {
+    display: flex;
+}
+
+main.mainPage .contestsBox .contest .crops img {
+    height: 40px;
+    aspect-ratio: 1/1;
+    margin: 0 5px;
+}
