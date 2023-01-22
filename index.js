@@ -40,17 +40,12 @@ const renderTemplate = (res, req, template, data = {}) => {
 };
 
 app.get("/", (req, res) => {
-    let contests;
-    fetch('http://localhost:5000/api/jacobcontests.json')
-        .then((response) => response.json())
-        .then((json) => {
-            contests = json;
+    let contests = require("./api/jacobcontests.json");
 
-            renderTemplate(res, req, "main.ejs", {
-                contests,
-                cropNames,
-            });
-        });
+    renderTemplate(res, req, "main.ejs", {
+        contests,
+        cropNames,
+    });
 });
 
 app.post("/api/jacobcontests", (req, res) => {
