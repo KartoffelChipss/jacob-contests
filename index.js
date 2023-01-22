@@ -5,6 +5,9 @@ const config = require("./config.json");
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
+const fetch = require('node-fetch/');
+
+const cropNames = require("./cropnames.json");
 
 const app = express();
 
@@ -37,11 +40,17 @@ const renderTemplate = (res, req, template, data = {}) => {
 };
 
 app.get("/", (req, res) => {
-    let contests = require("./api/jacobcontests.json");
+    let contests;
+    fetch('http://localhost:5000/api/jacobcontests.json')
+        .then((response) => response.json())
+        .then((json) => {
+            contests = json;
 
-    renderTemplate(res, req, "main.ejs", {
-        contests,
-    })
+            renderTemplate(res, req, "main.ejs", {
+                contests,
+                cropNames,
+            });
+        });
 });
 
 app.post("/api/jacobcontests", (req, res) => {
@@ -50,6 +59,8 @@ app.post("/api/jacobcontests", (req, res) => {
         res.send('Wrong key');
     } else {
         let events = JSON.stringify(req.body.events);
+
+        console.log(events)
 
         fs.writeFile("./api/jacobcontests.json", events, "utf-8", function (err) {
             if (err) {
@@ -60,7 +71,7 @@ app.post("/api/jacobcontests", (req, res) => {
 
             console.log("Contests updated!")
             res.status(200);
-            res.send('Data uploaded');
+            res.send('Data successfully uploaded');
         });
     }
 });
