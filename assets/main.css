@@ -52,6 +52,27 @@ button {
     color: var(--font-color);
 }
 
+@supports not selector(:focus-visible) {
+    a:focus {
+        outline: var(--main-color-1) 2px solid;
+        outline-offset: 2px;
+    }
+    
+    button:focus {
+        outline: var(--main-color-1) 2px solid;
+    }
+    
+}
+
+a:focus-visible {
+    outline: var(--main-color-1) 2px solid;
+    outline-offset: 2px;
+}
+
+button:focus-visible {
+    outline: var(--main-color-1) 2px solid;
+}
+
 .loader {
     position: fixed;
     top: 0;
@@ -220,11 +241,20 @@ main.mainPage .contestsBox .contest .crops img {
         justify-content: center;
     }
 
+    main.mainPage .contestsBox {
+        margin-top: 30px;
+        width: 80%;
+    }
+
     main.mainPage .contestsBox .contest {
         display: flex;
         flex-direction: column;
         align-items: center;
         width: 100%;
+    }
+
+    main.mainPage .contestsBox .contest p {
+        margin-bottom: 10px;
     }
 
     #themeChanger {
