@@ -111,10 +111,6 @@ function selectCrop(clickedEle, contests) {
     }
 }
 
-if (contestsBox.querySelectorAll(".contest").length <= 0) {
-    document.getElementById("noContests").style.display = "flex";
-}
-
 contestsBox.querySelectorAll(".contest").forEach(contest => {
     let dateEle = contest.querySelectorAll(".date")[0];
     let timestamp = Number(dateEle.innerHTML);
@@ -176,3 +172,7 @@ contestsBox.querySelectorAll(".contest").forEach(contest => {
         }, 1000);
     }
 });
+
+if (contestsBox.querySelectorAll(".contest").length <= 0) {
+    document.getElementById("noContests").style.display = "flex";
+}
