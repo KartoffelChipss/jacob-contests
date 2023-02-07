@@ -27,6 +27,17 @@ app.use(
 app.use("/", express.static(path.resolve(`${dataDir}${path.sep}assets`)));
 app.use("/api", express.static(path.resolve(`${dataDir}${path.sep}api`)));
 
+app.enable('trust proxy');
+
+app.use(function(request, response, next) {
+
+    if (config.developing !== true && !request.secure) {
+       return response.redirect("https://" + request.headers.host + request.url);
+    }
+
+    next();
+})
+
 const renderTemplate = (res, req, template, data = {}) => {
     
     const baseData = {

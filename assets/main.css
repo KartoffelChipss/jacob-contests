@@ -283,6 +283,10 @@ footer .left {
     align-items: center;
 }
 
+footer .left a {
+    color: var(--font-color);
+}
+
 footer .left p {
     margin: 0;
     font-size: 15px;
