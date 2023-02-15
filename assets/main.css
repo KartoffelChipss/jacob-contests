@@ -11,6 +11,7 @@
     --font-color: #e0e0e0;
     --background-color: #36393f;
     --font-color-wbg: #e0e0e0;
+    --contest-bg: #292929;
 }
 
 ::-moz-selection { /* For Firefox*/
@@ -147,7 +148,7 @@ main.mainPage .titleBox p {
 }
 
 main.mainPage .titleBox .typesBox {
-    background-color: #292929;
+    background-color: var(--contest-bg);
     border-radius: 13px;
     padding: 10px;
 }
@@ -186,7 +187,7 @@ main.mainPage .contestsBox .contest {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #292929;
+    background-color: var(--contest-bg);
     border-radius: 13px;
     padding: 10px;
     margin-top: 15px;
@@ -196,6 +197,7 @@ main.mainPage .contestsBox .contest p {
     margin: 0;
     font-size: 16px;
     font-weight: 600;
+    color: var(--font-color-wbg);
 }
 
 main.mainPage .contestsBox .contest .crops {

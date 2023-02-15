@@ -27,7 +27,11 @@ app.use(
 app.use("/", express.static(path.resolve(`${dataDir}${path.sep}assets`)));
 app.use("/api", express.static(path.resolve(`${dataDir}${path.sep}api`)));
 
-app.enable('trust proxy');
+if (config.developing === false) {
+    app.enable('trust proxy');
+} else {
+    console.log("Started in development mode");
+}
 
 app.use(function(request, response, next) {
 

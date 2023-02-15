@@ -17,11 +17,13 @@ function changeTheme(clickedEle) {
         clickedEle.getElementsByTagName("img")[0].style.filter = "invert(0%)";
         r.style.setProperty("--background-color", "#f5f5f5");
         r.style.setProperty("--font-color-wbg", "#111");
+        r.style.setProperty("--contest-bg", "#d4d4d4");
         clickedEle.dataset.status = "light";
     } else {
         clickedEle.getElementsByTagName("img")[0].style.filter = "invert(100%)";
         r.style.setProperty("--background-color", "#36393f");
         r.style.setProperty("--font-color-wbg", "#e0e0e0");
+        r.style.setProperty("--contest-bg", "#292929");
         clickedEle.dataset.status = "dark";
     }
 }
