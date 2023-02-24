@@ -70,7 +70,7 @@ app.post("/api/jacobcontests", (req, res) => {
     } else {
         let events = JSON.stringify(req.body.events);
 
-        console.log(events)
+        console.log("New events uploaded")
 
         fs.writeFile("./api/jacobcontests.json", events, "utf-8", function (err) {
             if (err) {
