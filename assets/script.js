@@ -1,3 +1,16 @@
+const cropNames = {
+    "0": "Cactus",
+    "1": "Carrots",
+    "2": "Cocoa beans",
+    "3": "Melons",
+    "4": "Mushrooms",
+    "5": "Nether warts",
+    "6": "Potatoes",
+    "7": "Pumpkins",
+    "8": "Sugar cane",
+    "9": "Wheat"
+};
+
 /*--- loader ---*/
 window.addEventListener("load", () => {
     const loader = document.querySelector(".loader");
@@ -177,4 +190,57 @@ contestsBox.querySelectorAll(".contest").forEach(contest => {
 
 if (contestsBox.querySelectorAll(".contest").length <= 0) {
     document.getElementById("noContests").style.display = "flex";
+}
+
+
+/*--- ALarm System ---*/
+let alarms = [];
+
+function alarmClick(timestamp) {
+    if (!("Notification" in window)) {
+        alert("Your browser does not support notifications!")
+        return;
+    }
+
+    if (Notification.permission === "granted") {
+        createAlarm(timestamp);
+        return;
+    } else {
+        Notification.requestPermission().then(perm => {
+            if (perm === "granted") {
+                createAlarm(timestamp);
+            } else {
+                alert("You have to enable notifications for this website!");
+            }
+        })
+    }
+}
+
+function createAlarm(timestamp) {
+    let alarmbtn = document.getElementById(`alertcontest_${timestamp}`);
+    
+    if (alarms.includes(timestamp)) {
+        alarms.splice(alarms.indexOf(timestamp), 1);
+        alarmbtn.querySelectorAll("i")[0].innerHTML = "notifications";
+        return;
+    }
+
+    let timeBetween = timestamp - Date.now();
+    if (timeBetween <= 0) {
+        alarmbtn.querySelectorAll("i")[0].innerHTML = "notifications";
+        return;
+    };
+
+    alarms.push(timestamp);
+    alarmbtn.querySelectorAll("i")[0].innerHTML = "notifications_active";
+    setTimeout(() => {
+        if (!alarms.includes(timestamp)) return;
+
+        let contest = document.getElementById(`contest_${timestamp}`);
+        let notification = new Notification("Jacobs Contest is starting now!", {
+            body: `${cropNames[contest.dataset.cropone]}, ${cropNames[contest.dataset.croptwo]} and ${cropNames[contest.dataset.cropthree]}`,
+            icon: "./crops/9.png"
+        });
+        alarmbtn.querySelectorAll("i")[0].innerHTML = "notifications";
+    }, timeBetween)
 }

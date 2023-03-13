@@ -17,10 +17,7 @@
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://jacobs.strassburger.org/img/preview.png">
 
-    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue-deep_purple.min.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link href="/main.css" rel="stylesheet">
 </head>
 <body>
@@ -46,7 +43,7 @@
             </div>
             <div class="contestsBox" id="contestsBox">
                 <% contests.forEach(contest => {%>
-                    <div class="contest" data-cropone="<%= contest.crops[0] %>" data-croptwo="<%= contest.crops[1] %>" data-cropthree="<%= contest.crops[2] %>">
+                    <div class="contest" id="contest_<%= contest.timestamp %>" data-cropone="<%= contest.crops[0] %>" data-croptwo="<%= contest.crops[1] %>" data-cropthree="<%= contest.crops[2] %>">
                         <p class="countDown">loading timer ...</p>
                         <p class="date"><%= contest.timestamp %></p>
                         <div class="crops">
@@ -54,6 +51,7 @@
                             <img src="/crops/<%= contest.crops[1] %>.png" title="<%= cropNames[contest.crops[1]]%>" alt="<%= cropNames[contest.crops[1]]%>">
                             <img src="/crops/<%= contest.crops[2] %>.png" title="<%= cropNames[contest.crops[2]]%>" alt="<%= cropNames[contest.crops[2]]%>">
                         </div>
+                        <button id="alertcontest_<%= contest.timestamp %>" title="get a notification" type="button" onclick="alarmClick('<%= contest.timestamp %>')"><i class="material-icons">notifications</i></button>
                     </div>
                 <%});%>
                 <div class="noContests" id="noContests" style="display: none;">

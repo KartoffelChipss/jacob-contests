@@ -144,6 +144,7 @@ main.mainPage .titleBox h1 {
 
 main.mainPage .titleBox p {
     font-size: 18px;
+    font-weight: 400;
     color: var(--font-color-wbg);
 }
 
@@ -189,7 +190,7 @@ main.mainPage .contestsBox .contest {
     align-items: center;
     background-color: var(--contest-bg);
     border-radius: 13px;
-    padding: 10px;
+    padding: 13px;
     margin-top: 15px;
 }
 
@@ -208,6 +209,17 @@ main.mainPage .contestsBox .contest .crops img {
     height: 40px;
     aspect-ratio: 1/1;
     margin: 0 5px;
+}
+
+main.mainPage .contestsBox .contest button {
+    background-color: transparent;
+    border: none;
+    padding: 10px;
+    border-radius: 13px;
+}
+
+main.mainPage .contestsBox .contest button i {
+    color: var(--font-color-wbg);
 }
 
 .noContests {
@@ -255,8 +267,12 @@ main.mainPage .contestsBox .contest .crops img {
         width: 100%;
     }
 
+    main.mainPage .contestsBox .contest .crops {
+        margin: 10px 0;
+    }
+
     main.mainPage .contestsBox .contest p {
-        margin-bottom: 10px;
+        margin: 10px 0;
     }
 
     #themeChanger {
