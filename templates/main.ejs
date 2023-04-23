@@ -23,31 +23,13 @@
 <body>
     <div class="loader"></div>
 
-    <div class="cookieBanner" id="cookieBanner">
+    <div class="cookieBanner" id="cookieBanner" style="display: none;">
         <div class="inner">
             <div class="content">
                 <div class="titleBar">
                     <img src="/img/cookie.png">
                     <h3>Cookies</h3>
                 </div>
-                <!-- <div class="cookieCheckboxDiv">
-                    <div class="toggle-box">
-                        <input type="checkbox" name="necessaryCookies" id="necessaryCookies" checked disabled>
-                    </div>
-                    <label for="necessaryCookies" style="margin-left: -15px;">Essential Cookies</label>
-                </div> -->
-                <!-- <div class="cookieCheckboxDiv">
-                    <div class="toggle-box">
-                        <input type="checkbox" name="necessaryCookies" id="necessaryCookies">
-                    </div>
-                    <label for="necessaryCookies" style="margin-left: -15px;">Functional Cookies</label>
-                </div>
-                <div class="cookieCheckboxDiv">
-                    <div class="toggle-box">
-                        <input type="checkbox" name="necessaryCookies" id="necessaryCookies" checked>
-                    </div>
-                    <label for="necessaryCookies" style="margin-left: -15px;">Anonymous statistics</label>
-                </div> -->
                 <p>We use cookies to enhance your experience on this website and to measure site statistics.<br> Choose "Reject all" or "Configure cookies" to reject all cookies or to configure wich cookies you want to use.</p>
             </div>
             <div class="buttons">
@@ -102,6 +84,7 @@
         <main class="mainPage">
             <div class="titleBox">
                 <h1>Jacob's Farming Contests</h1>
+                <div class="divider"></div>
                 <p>Choose wich Crops you want to farm:</p>
                 <div class="typesBox" id="typesBox">
                     <button type="button" data-selected="false" data-cropid="7" onclick="selectCrop(this, '<%= contests %>')"><img src="/crops/7.png" alt="pumpkin" title="Pumpkins"></button>
@@ -159,7 +142,7 @@
         <div class="right">
             <a onclick="toggleModal('aboutModal')">About</a>
             <a href="https://github.com/KartoffelChipss/jacob-contests">GitHub</a>
-            <a href="https://strassburger.org#projekte">Other stuff</a>
+            <a onclick="openConfigureCookiesModal()">Privacy Settings</a>
         </div>
     </footer>
 
