@@ -244,3 +244,55 @@ function createAlarm(timestamp) {
         alarmbtn.querySelectorAll("i")[0].innerHTML = "notifications";
     }, timeBetween)
 }
+
+const cookieBanner = document.getElementById("cookieBanner");
+const cookieModal = document.getElementById("cookieModal");
+// necessary.functional.statistics.marketing
+
+function acceptAllCookies() {
+    document.cookie = `privacySettings=${encodeURIComponent("y.y.y.n")}`;
+    cookieBanner.style.display = "none";
+    cookieModal.style.display = "none";
+}
+
+function rejectAllCookies() {
+    document.cookie = `privacySettings=${encodeURIComponent("y.n.n.n")}`;
+    cookieBanner.style.display = "none";
+    cookieModal.style.display = "none";
+}
+
+function openConfigureCookiesModal() {
+    cookieModal.style.display = "block";
+    cookieBanner.style.display = "none";
+}
+
+const necessaryCookiesInput = document.getElementById("necessaryCookiesInput");
+const functionalCookiesInput = document.getElementById("functionalCookiesInput");
+const statisticsCookiesInput = document.getElementById("statisticsCookiesInput");
+
+function saveCookieSettings() {
+    let privacystring = "";
+    if (necessaryCookiesInput.checked) {
+        privacystring = privacystring + "y.";
+    } else {
+        privacystring = privacystring + "n.";
+    }
+
+    if (functionalCookiesInput.checked) {
+        privacystring = privacystring + "y.";
+    } else {
+        privacystring = privacystring + "n.";
+    }
+
+    if (statisticsCookiesInput.checked) {
+        privacystring = privacystring + "y.";
+    } else {
+        privacystring = privacystring + "n.";
+    }
+
+    privacystring = privacystring + "n";//marketing
+
+    document.cookie = `privacySettings=${encodeURIComponent(privacystring)}`;
+    cookieBanner.style.display = "none";
+    cookieModal.style.display = "none";
+}

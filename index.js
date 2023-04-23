@@ -6,6 +6,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
 const fetch = require('node-fetch/');
+const cookieParser = require('cookie-parser');
 
 const cropNames = require("./cropnames.json");
 
@@ -54,9 +55,20 @@ const renderTemplate = (res, req, template, data = {}) => {
     );
 };
 
-app.get("/", (req, res) => {
-    let contests = require("./api/jacobcontests.json");
+let contests = require("./api/jacobcontests.json");
 
+setInterval(() => {
+    fs.readFile('./api/jacobcontests.json', function read(err, data) {
+        if (err) {
+            console.log(err)
+        }
+        const content = JSON.parse(data);
+    
+        contests = content;
+    });
+}, 5 * 60 * 1000)
+
+app.get("/", (req, res) => {
     renderTemplate(res, req, "main.ejs", {
         contests,
         cropNames,
