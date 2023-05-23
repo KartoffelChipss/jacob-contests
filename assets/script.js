@@ -221,6 +221,7 @@ contestsBox.querySelectorAll(".contest").forEach(contest => {
 
 if (contestsBox.querySelectorAll(".contest").length <= 0) {
     document.getElementById("noContests").style.display = "flex";
+    document.getElementById("announcementBanner").style.display = "block";
 }
 
 

@@ -114,6 +114,28 @@ button:focus-visible {
     }
 }
 
+.announcementBanner {
+    width: 100%;
+    position: relative;
+    text-align: center;
+    margin-top: 25px;
+    padding: 15px;
+    border-radius: 7px;
+    background-color: #9761EC;
+    color: var(--font-color);
+    font-size: 18px;
+    line-height: 1.5;
+    
+    .closebtn {
+        background-color: transparent;
+        color: var(--font-color);
+        border: none;
+        position: absolute;
+        top: 5px;
+        right: 2.5px;
+    }
+}
+
 .cookieBanner {
     position: fixed;
     display: flex;
