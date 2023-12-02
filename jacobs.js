@@ -58,6 +58,8 @@ const renderTemplate = (res, req, template, data = {}) => {
 let contests = require("./api/jacobcontests.json");
 
 setInterval(() => {
+    console.log("Contests page updated!")
+
     fs.readFile('./api/jacobcontests.json', function read(err, data) {
         if (err) {
             console.log(err)
@@ -91,7 +93,7 @@ app.post("/api/jacobcontests", (req, res) => {
                 return console.log(err);
             }
 
-            console.log("Contests updated!")
+            console.log("Updated contests.json")
             res.status(200);
             res.send('Data successfully uploaded');
         });
