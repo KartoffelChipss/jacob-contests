@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jacobs Farming Contests tracker for Hypixel Skyblock</title>
+    <link rel="icon" type="image/png" sizes="256x256" href="/favicons/favicon-256x256.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+
+    <meta property="og:title" content="Jacobs Farming Contests tracker for Hypixel Skyblock">
+    <meta property="og:site_name" content="Jacobs Farming Contests">
+    <meta property="og:url" content="https://jacobs.strassburger.org/">
+    <meta property="og:description" content="This is a tracker to get an overview of the upcoming Jacobs farming contests with the ability to filter by crops. You can get a better overview over all jacobs farming events with the times automatically adjusting to your timezone.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://jacobs.strassburger.org/img/preview.png">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link href="/main.css" rel="stylesheet">
+</head>
+<body>
+    <div class="loader"></div>
+
+    <div class="cookieBanner" id="cookieBanner" style="display: none;">
+        <div class="inner">
+            <div class="content">
+                <div class="titleBar">
+                    <img src="/img/cookie.png">
+                    <h3>Cookies</h3>
+                </div>
+                <p>We use cookies to enhance your experience on this website and to measure site statistics.<br> Choose "Reject all" or "Configure cookies" to reject all cookies or to configure wich cookies you want to use.</p>
+            </div>
+            <div class="buttons">
+                <button type="button" class="acceptAll" onclick="acceptAllCookies()">Accept all</button>
+                <button type="button" class="rejectAll" onclick="rejectAllCookies()">Reject all</button>
+                <button type="button" class="configure" onclick="openConfigureCookiesModal()">Configure cookies</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="cookieModal" id="cookieModal">
+        <div class="content">
+            <h3>Configure cookies</h3>
+            <div class="privacySection">
+                <div class="cookieCheckboxDiv">
+                    <div>
+                        <div class="toggle-box">
+                            <input type="checkbox" name="necessaryCookiesInput" id="necessaryCookiesInput" checked disabled>
+                        </div>
+                        <label for="necessaryCookiesInput" style="margin-left: -15px;">Essential cookies</label>
+                    </div>
+                    <p>Essential cookies are absolutely necessary for the operation of the website.</p>
+                </div>
+                <div class="cookieCheckboxDiv">
+                    <div>
+                        <div class="toggle-box">
+                            <input type="checkbox" name="functionalCookiesInput" id="functionalCookiesInput">
+                        </div>
+                        <label for="functionalCookiesInput" style="margin-left: -15px;">Functional cookies</label>
+                    </div>
+                    <p>Functional cookies are used to make some features more comfortable to use. This includes only saving the current color scheme.</p>
+                </div>
+                <div class="cookieCheckboxDiv">
+                    <div>
+                        <div class="toggle-box">
+                            <input type="checkbox" name="statisticsCookiesInput" id="statisticsCookiesInput">
+                        </div>
+                        <label for="statisticsCookiesInput" style="margin-left: -15px;">Statistics cookies</label>
+                    </div>
+                    <p>Statistics cookies are used to record how many people use this website.</p>
+                </div>
+            </div>
+            <div class="buttons">
+                <button type="button" class="saveSettings" onclick="saveCookieSettings()">Save</button>
+                <button type="button" class="acceptAll" onclick="acceptAllCookies()">Accept all</button>
+                <button type="button" class="rejectAll" onclick="rejectAllCookies()">Reject all</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="outer-main">
+        <main class="mainPage">
+            <!-- <div class="announcementBanner" id="announcementBanner" style="display: none;">
+                <span class="notification">There will be no contests from May 31st to June 4th, due to me not being able to upload the contests.<br>The website will be up to date again on June 4th.</span>
+                <button role="button" type="button" class="closebtn" onclick="document.getElementById('announcementBanner').style.display = 'none'"><i class="material-icons">close</i></button>
+            </div> -->
+            <div class="titleBox">
+                <h1>Jacob's Farming Contests</h1>
+                <div class="divider"></div>
+                <p>Choose wich Crops you want to farm:</p>
+                <div class="typesBox" id="typesBox">
+                    <button type="button" data-selected="false" data-cropid="7" onclick="selectCrop(this, '<%= contests %>')"><img src="/crops/7.png" alt="pumpkin" title="Pumpkins"></button>
+                    <button type="button" data-selected="false" data-cropid="3" onclick="selectCrop(this, '<%= contests %>')"><img src="/crops/3.png" alt="melons" title="Melon"></button>
+                    <button type="button" data-selected="false" data-cropid="6" onclick="selectCrop(this, '<%= contests %>')"><img src="/crops/6.png" alt="potatoes" title="Potatoes"></button>
+                    <button type="button" data-selected="false" data-cropid="1" onclick="selectCrop(this, '<%= contests %>')"><img src="/crops/1.png" alt="carrots" title="Carrots"></button>
+                    <button type="button" data-selected="false" data-cropid="9" onclick="selectCrop(this, '<%= contests %>')"><img src="/crops/9.png" alt="wheat" title="Wheat"></button>
+                    <button type="button" data-selected="false" data-cropid="2" onclick="selectCrop(this, '<%= contests %>')"><img src="/crops/2.png" alt="COCOA BEANS" title="Cocoa Beans"></button>
+                    <button type="button" data-selected="false" data-cropid="4" onclick="selectCrop(this, '<%= contests %>')"><img src="/crops/4.png" alt="Mushrooms" title="Mushrooms"></button>
+                    <button type="button" data-selected="false" data-cropid="0" onclick="selectCrop(this, '<%= contests %>')"><img src="/crops/0.png" alt="Cactus" title="Cactus"></button>
+                    <button type="button" data-selected="false" data-cropid="8" onclick="selectCrop(this, '<%= contests %>')"><img src="/crops/8.png" alt="Cugar Cane" title="Sugar Cane"></button>
+                    <button type="button" data-selected="false" data-cropid="5" onclick="selectCrop(this, '<%= contests %>')"><img src="/crops/5.png" alt="Nether Wart" title="Nether Wart"></button>
+                </div>
+            </div>
+            <div class="contestsBox" id="contestsBox">
+                <% contests.forEach(contest => {%>
+                    <div class="contest" id="contest_<%= contest.timestamp %>" data-cropone="<%= contest.crops[0] %>" data-croptwo="<%= contest.crops[1] %>" data-cropthree="<%= contest.crops[2] %>">
+                        <p class="countDown">loading timer ...</p>
+                        <p class="date"><%= contest.timestamp %></p>
+                        <div class="crops">
+                            <img src="/crops/<%= contest.crops[0] %>.png" title="<%= cropNames[contest.crops[0]]%>" alt="<%= cropNames[contest.crops[0]]%>">
+                            <img src="/crops/<%= contest.crops[1] %>.png" title="<%= cropNames[contest.crops[1]]%>" alt="<%= cropNames[contest.crops[1]]%>">
+                            <img src="/crops/<%= contest.crops[2] %>.png" title="<%= cropNames[contest.crops[2]]%>" alt="<%= cropNames[contest.crops[2]]%>">
+                        </div>
+                        <button id="alertcontest_<%= contest.timestamp %>" title="get a notification" type="button" onclick="alarmClick('<%= contest.timestamp %>')"><i class="material-icons">notifications</i></button>
+                    </div>
+                <%});%>
+                <div class="noContests" id="noContests" style="display: none;">
+                    <h3>No contests found</h3>
+                    <p>This is probably because it has just been new year in Hypixel Skyblock.</p>
+                    <p>The contests will be updated soon.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div class="modal" id="aboutModal" style="display: none;">
+        <div class="modal-content">
+            <button onclick="toggleModal('aboutModal')" class="close">&times;</button>
+            <h3>About</h3>
+            <p>This website is a tracker for Hypixel Skyblock's jacobs contests (jacobs events). With this website, you have a better overview over all jacobs contests than with the ingame calender.</p>
+            <p>The data for this website has to be collected manually every Skyblock year. Therefore it can happen, that there are no contests shortly after the new year event.</p>
+            <p>If you want to use the data from this website for your own project, you can use the <a href="https://jacobs.strassburger.org/api/jacobcontests.json">/api/jacobcontests.json</a> endpoint. If you're building something public-facing (like a website, bot, app, etc.), I ask you to include a link or note somewhere in your project crediting <a href="https://jacobs.strassburger.org/">jacobs.strassburger.org</a> as your data source.</p>
+            <p>If you have any questions or suggestions, you can dm me on <a href="#" onclick="CopyToClipboard('discordtext');return false;" id="discordtext">Discord</a> or <a href="https://twitter.com/Kartoffelchipse">Twitter</a></p>
+            <p style="margin-top: 30px;">This website is not affiliated with Mojang nor Hypixel</p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="left">
+            <p>Made by <a href="https://strassburger.org/">KartoffelChips#0445</a></p>
+        </div>
+        <div class="right">
+            <a onclick="toggleModal('aboutModal')">About</a>
+            <a href="https://github.com/KartoffelChipss/jacob-contests">GitHub</a>
+            <a onclick="openConfigureCookiesModal()">Privacy Settings</a>
+        </div>
+    </footer>
+
+    <button id="themeChanger" type="button" onclick="changeTheme(this)" data-status="dark"><img src="/img/day-and-night.png"></button>
+
+    <script src="/script.js"></script>
+</body>
+</html>

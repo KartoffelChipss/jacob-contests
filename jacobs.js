@@ -25,7 +25,7 @@ app.use(
     }),
 );
 
-app.use("/", express.static(path.resolve(`${dataDir}${path.sep}assets`)));
+app.use("/assets", express.static(path.resolve(`${dataDir}${path.sep}assets`)));
 app.use("/api", express.static(path.resolve(`${dataDir}${path.sep}api`)));
 
 if (config.developing === false) {

@@ -1,652 +1,94 @@
-@import url("https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;500;600;700;800&display=swap");
-@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
-:root {
-  --main-color-1: #9761EC;
-  --main-color-2: #0088F5;
-  --secondary-color-1: #4A4453;
-  --secondary-color-2: #858486;
-  --grey: #36393f;
-  --white: #f5f5f5;
-  --font-color: #e0e0e0;
-  --background-color: #36393f;
-  --font-color-wbg: #e0e0e0;
-  --contest-bg: #292929;
-}
-
-::-moz-selection { /* For Firefox*/
-  color: #f5f5f5;
-  background: var(--main-color-2);
-}
-
-::selection {
-  color: #f5f5f5;
-  background: var(--main-color-2);
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  font-family: "Sora", sans-serif;
-  font-weight: 700;
-  font-size: larger;
-  line-height: 1;
-  height: 100vh;
-  width: 100%;
-  position: relative;
-  color: var(--font-color);
-  background-color: var(--background-color);
-}
-
-p {
-  font-size: 14px;
-  color: var(--font-color);
-}
-
-h1 {
-  color: var(--font-color);
-}
-
-button {
-  color: var(--font-color);
-}
-
-@supports not selector(:focus-visible) {
-  a:focus {
-    outline: var(--main-color-2) 2px solid;
-    outline-offset: 2px;
-  }
-  button:focus {
-    outline: var(--main-color-2) 2px solid;
-  }
-}
-a:focus-visible {
-  outline: var(--main-color-2) 2px solid;
-  outline-offset: 2px;
-}
-
-button:focus-visible {
-  outline: var(--main-color-2) 2px solid;
-}
-
-.loader {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #333333;
-  transition: opacity 0.75s, visibility 0.75s;
-  transform: scaleX(1);
-}
-
-.loader--hidden {
-  opacity: 0;
-  visibility: hidden;
-}
-
-.loader::after {
-  content: "";
-  width: 75px;
-  height: 75px;
-  border: 15px solid transparent;
-  border-top-color: var(--main-color-2);
-  border-radius: 50%;
-  animation: loading 0.75s ease infinite;
-}
-
-@keyframes loading {
-  from {
-    transform: rotate(0turn);
-  }
-  to {
-    transform: rotate(1turn);
-  }
-}
-.announcementBanner {
-  width: 100%;
-  position: relative;
-  text-align: center;
-  margin-top: 25px;
-  padding: 15px;
-  border-radius: 7px;
-  background-color: #9761EC;
-  color: var(--font-color);
-  font-size: 18px;
-  line-height: 1.5;
-}
-.announcementBanner .closebtn {
-  background-color: transparent;
-  color: var(--font-color);
-  border: none;
-  position: absolute;
-  top: 5px;
-  right: 2.5px;
-}
-
-.cookieBanner {
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  bottom: 0;
-  left: 0;
-  z-index: 20;
-  width: 100%;
-  background-color: #1c1d1f;
-  color: var(--white);
-  line-height: 1.3;
-  font-family: "Sora", sans-serif;
-  box-shadow: 0px -2px 10px 12px rgba(0, 0, 0, 0.52);
-}
-.cookieBanner .inner {
-  display: flex;
-  align-items: center;
-  padding: 15px;
-}
-@media screen and (max-width: 1280px) {
-  .cookieBanner .inner {
-    flex-direction: column;
-  }
-}
-.cookieBanner .buttons {
-  margin-left: 50px;
-}
-@media screen and (max-width: 1280px) {
-  .cookieBanner .buttons {
-    margin-left: 0;
-    margin-top: 15px;
-  }
-}
-.cookieBanner .buttons button {
-  border: none;
-  padding: 13px;
-  font-size: 16px;
-  margin-left: 10px;
-  transition: transform 0.1s ease-in-out;
-}
-.cookieBanner .buttons .acceptAll {
-  background-color: var(--main-color-2);
-}
-@media screen and (max-width: 430px) {
-  .cookieBanner .buttons .acceptAll {
-    margin-left: 0;
-  }
-}
-.cookieBanner .buttons .acceptAll:hover {
-  transform: scale(1.05);
-}
-.cookieBanner .buttons .rejectAll {
-  background-color: var(--grey);
-}
-.cookieBanner .buttons .rejectAll:hover {
-  transform: scale(1.05);
-}
-.cookieBanner .buttons .configure {
-  background-color: transparent;
-  padding: 0;
-}
-@media screen and (max-width: 430px) {
-  .cookieBanner .buttons .configure {
-    margin: 25px 0;
-    margin-bottom: 10px;
-  }
-}
-.cookieBanner .buttons .configure:hover {
-  color: #cecece;
-}
-.cookieBanner .content {
+@import url("./assets.css");
+main {
   display: flex;
   flex-direction: column;
-}
-.cookieBanner .content .cookieCheckboxDiv {
-  display: flex;
   align-items: center;
-}
-.cookieBanner .content .cookieCheckboxDiv label {
-  margin: 0;
-  font-size: 16px;
-}
-.cookieBanner .titleBar {
-  display: flex;
-  align-items: center;
-}
-.cookieBanner .titleBar img {
-  height: 45px;
-}
-.cookieBanner .titleBar h3 {
-  font-size: 26px;
-  margin: 0;
-  margin-left: 7px;
-}
-
-.cookieModal {
-  display: none;
-  position: fixed;
-  z-index: 50;
-  left: 0;
-  top: 0;
+  --padding: 15px;
   width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgb(0, 0, 0);
-  background-color: rgba(0, 0, 0, 0.4);
+  max-width: calc(100% - var(--padding) * 2);
+  padding: var(--padding);
 }
-.cookieModal .content {
-  background-color: #36393f;
-  background-size: cover;
-  margin: 15% auto;
-  padding: 20px;
-  border: 1px solid #dbdbdb;
-  width: 80%;
-  color: #f5f5f5;
+main h1 {
+  font-size: 43px;
+  margin: 20px 0;
 }
-.cookieModal h3 {
-  margin: 0;
-  border-radius: 5px;
-  padding-bottom: 10px;
-  font-weight: 600;
-  font-size: 27px;
-  border-bottom: var(--secondary-color-2) 5px solid;
-}
-.cookieModal .buttons {
-  margin-top: 25px;
-  display: flex;
-}
-@media screen and (max-width: 440px) {
-  .cookieModal .buttons {
-    flex-direction: column;
-  }
-}
-.cookieModal .buttons button {
-  border: none;
-  padding: 13px;
-  font-size: 16px;
-  margin-left: 10px;
-  transition: transform 0.1s ease-in-out;
-}
-.cookieModal .buttons .acceptAll {
-  background-color: #1c1d1f;
-}
-@media screen and (max-width: 440px) {
-  .cookieModal .buttons .acceptAll {
-    margin: 0;
-    margin-bottom: 10px;
-  }
-}
-.cookieModal .buttons .acceptAll:hover {
-  transform: scale(1.05);
-}
-.cookieModal .buttons .rejectAll {
-  background-color: #1c1d1f;
-}
-@media screen and (max-width: 440px) {
-  .cookieModal .buttons .rejectAll {
-    margin: 0;
-    margin-bottom: 10px;
-  }
-}
-.cookieModal .buttons .rejectAll:hover {
-  transform: scale(1.05);
-}
-.cookieModal .buttons .saveSettings {
-  background-color: var(--main-color-2);
-}
-@media screen and (max-width: 440px) {
-  .cookieModal .buttons .saveSettings {
-    margin: 0;
-    margin-bottom: 10px;
-  }
-}
-.cookieModal .buttons .saveSettings:hover {
-  transform: scale(1.05);
-}
-.cookieModal .cookieCheckboxDiv {
-  display: flex;
-  flex-direction: column;
-  margin-top: 10px;
-}
-.cookieModal .cookieCheckboxDiv div {
-  display: flex;
-  align-items: center;
-}
-.cookieModal .cookieCheckboxDiv div label {
-  margin: 0;
-  font-size: 20px;
-}
-.cookieModal .cookieCheckboxDiv p {
-  font-size: 16px;
-  margin: 0;
-}
-
-.outer-main {
-  display: flex;
-  justify-content: center;
-}
-
-main.mainPage {
-  max-width: 1500px;
-  width: 80%;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-}
-
-main.mainPage .titleBox {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-main.mainPage .titleBox h1 {
-  font-size: 37px;
-  margin: 0;
-  margin-top: 25px;
-  color: var(--font-color-wbg);
-}
-
-.divider {
-  background-color: #858486;
-  height: 6px;
-  width: 100%;
+main .divider {
+  height: 5px;
   border-radius: 3px;
-  margin: 25px 0;
-  margin-bottom: 35px;
+  background-color: var(--sec-color-2);
+  width: 100%;
+  max-width: 650px;
+  margin: 15px 0;
 }
-
-main.mainPage .titleBox p {
+main p {
+  margin: 20px 0;
   font-size: 18px;
   font-weight: 400;
-  color: var(--font-color-wbg);
 }
-
-main.mainPage .titleBox .typesBox {
-  background-color: var(--contest-bg);
-  border-radius: 13px;
-  padding: 10px;
+main .typesBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  background-color: rgba(255, 255, 255, 0.03);
+  padding: 7px;
+  border-radius: 7px;
 }
-
-main.mainPage .titleBox .typesBox button {
+main .typesBox button {
   background-color: transparent;
   border: none;
-  border-radius: 13px;
-  padding: 2.5px;
-  transition: all 0.1s ease-in-out;
-}
-
-main.mainPage .titleBox .typesBox button.active {
-  background-color: rgba(133, 132, 134, 0.4941176471);
-}
-
-main.mainPage .titleBox .typesBox button.inactive {
-  filter: opacity(40%);
-}
-
-main.mainPage .titleBox .typesBox button img {
-  height: 50px;
-  aspect-ratio: 1/1;
-}
-
-main.mainPage .contestsBox {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  width: 65%;
-  margin-top: 65px;
-}
-
-main.mainPage .contestsBox .contest {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: var(--contest-bg);
-  border-radius: 13px;
-  padding: 13px;
-  margin-top: 15px;
-}
-
-main.mainPage .contestsBox .contest p {
-  margin: 0;
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--font-color-wbg);
-}
-
-main.mainPage .contestsBox .contest .crops {
-  display: flex;
-}
-
-main.mainPage .contestsBox .contest .crops img {
-  height: 40px;
-  aspect-ratio: 1/1;
+  background-color: transparent;
+  border-radius: 7px;
+  transition: background 0.1s ease-in-out;
+  padding: 10px;
   margin: 0 5px;
 }
-
-main.mainPage .contestsBox .contest button {
-  background-color: transparent;
-  border: none;
-  padding: 10px;
-  border-radius: 13px;
+main .typesBox button img {
+  height: 45px;
+  width: 45px;
 }
-
-main.mainPage .contestsBox .contest button i {
-  color: var(--font-color-wbg);
+main .typesBox button[data-selected=true] {
+  background-color: rgba(255, 255, 255, 0.08);
 }
-
-.noContests {
-  align-items: center;
+main .typesBox button:hover:not([data-selected=true]) {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+main .typesBox button.inactive {
+  filter: opacity(40%);
+}
+main .typesBox button:first-of-type {
+  margin-left: 0;
+}
+main .typesBox button:last-of-type {
+  margin-right: 0;
+}
+main .contestsBox {
+  display: flex;
   flex-direction: column;
+  width: 100%;
+  max-width: 1400px;
 }
-
-#themeChanger {
+main .contestsBox .contest {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+main .contestsBox .contest .crops {
+  display: flex;
+  align-items: center;
+}
+main .contestsBox .contest .crops img {
+  height: 45px;
+  aspect-ratio: 1/1;
+}
+main .contestsBox .contest .alertBtn {
   background-color: transparent;
   border: none;
-  position: absolute;
-  top: 25px;
-  right: 25px;
-  font-size: 30px;
-  color: var(--font-color);
+  outline: none;
+  padding: 0;
 }
-
-#themeChanger img {
-  height: 35px;
-  aspect-ratio: 1/1;
-  filter: invert(100%);
-}
-
-@media screen and (max-width: 830px) {
-  main.mainPage .titleBox {
-    text-align: center;
-  }
-  main.mainPage .titleBox .typesBox {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  main.mainPage .contestsBox {
-    margin-top: 30px;
-    width: 80%;
-  }
-  main.mainPage .contestsBox .contest {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-  }
-  main.mainPage .contestsBox .contest .crops {
-    margin: 10px 0;
-  }
-  main.mainPage .contestsBox .contest p {
-    margin: 10px 0;
-  }
-  #themeChanger {
-    display: none;
-  }
-}
-body > footer {
-  position: sticky;
-  top: 100vh;
-}
-
-footer {
-  display: flex;
-  justify-content: space-around;
-  padding: 30px 10px;
-  background-color: #292929;
-  color: var(--white);
-  align-items: center;
-  margin-top: 50px;
-}
-
-footer .left {
-  display: flex;
-  align-items: center;
-}
-
-footer .left a {
-  color: var(--font-color);
-}
-
-footer .left p {
-  margin: 0;
-  font-size: 15px;
-  color: var(--font-color);
-}
-
-footer .left img {
-  height: 50px;
-  width: auto;
-  margin-right: 5px;
-  border: var(--main-color-1) 2px solid;
-  border-radius: 100%;
-  aspect-ratio: 1/1;
-}
-
-footer .right {
-  display: flex;
-  justify-content: right;
-  align-items: center;
-}
-
-footer .right a {
-  color: var(--font-color);
-  margin-left: 10px;
-  font-size: 15px;
-}
-
-footer .right a:hover {
-  cursor: pointer;
-}
-
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 2;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgb(0, 0, 0);
-  background-color: rgba(0, 0, 0, 0.4);
-}
-
-.modal-content {
-  background-color: #36393f;
-  background-size: cover;
-  margin: 15% auto;
-  padding: 20px;
-  border: 1px solid #dbdbdb;
-  width: 80%;
-  color: #f5f5f5;
-}
-
-.modal-content h3 {
-  font-size: 27px;
-  font-weight: 500;
-  margin: 0;
-  margin-bottom: 15px;
-}
-
-.modal-content p {
-  font-size: 18px;
-  font-weight: 500;
-}
-
-.modal-content a {
-  color: var(--main-color-1);
-}
-
-.modal-title {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  margin-top: 15px;
-}
-
-.close {
-  color: #f5f5f5;
-  font-size: 35px;
-  border: none;
-  background: none;
-  width: -moz-fit-content;
-  width: fit-content;
-  margin-top: -12px;
-}
-
-.close:hover, .close:focus {
-  color: #dbdbdb;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.modal-active {
-  display: block;
-}
-
-.toggle-box {
-  transform: scale(0.4);
-  display: block;
-  width: -moz-min-content;
-  width: min-content;
-  margin: 0;
-  margin-left: -28px;
-}
-.toggle-box input[type=checkbox] {
-  position: relative;
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
-  width: 100px;
-  height: 50px;
-  background: #ccc;
-  border-radius: 50px;
-  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-  transition: 0.4s;
-}
-.toggle-box input:checked[type=checkbox] {
-  background: var(--main-color-2);
-}
-.toggle-box input[type=checkbox]::after {
-  position: absolute;
-  content: "";
-  width: 50px;
-  height: 50px;
-  top: 0;
-  left: 0;
-  background: #fff;
-  border-radius: 50%;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  transform: scale(1.1);
-  transition: 0.4s;
-}
-.toggle-box input:checked[type=checkbox]::after {
-  left: 50%;
+main .contestsBox .contest .alertBtn svg {
+  width: 25px;
+  height: 25px;
 }/*# sourceMappingURL=main.css.map */

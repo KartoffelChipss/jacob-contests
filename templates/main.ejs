@@ -2,23 +2,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jacobs Farming Contests tracker for Hypixel Skyblock</title>
-    <link rel="icon" type="image/png" sizes="256x256" href="/favicons/favicon-256x256.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="/favicons/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/assets/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+    <link rel="manifest" href="/assets/favicons/site.webmanifest">
+    <link rel="mask-icon" href="/assets/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
 
     <meta property="og:title" content="Jacobs Farming Contests tracker for Hypixel Skyblock">
     <meta property="og:site_name" content="Jacobs Farming Contests">
-    <meta property="og:url" content="https://jacobs.strassburger.org/">
+    <meta property="og:url" content="https://jacobs.strassburger.dev/">
     <meta property="og:description" content="This is a tracker to get an overview of the upcoming Jacobs farming contests with the ability to filter by crops. You can get a better overview over all jacobs farming events with the times automatically adjusting to your timezone.">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="https://jacobs.strassburger.org/img/preview.png">
+    <meta property="og:image" content="https://jacobs.strassburger.dev/img/preview.png">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link href="/main.css" rel="stylesheet">
+    <link href="/assets/main.css" rel="stylesheet">
 </head>
 <body>
     <div class="loader"></div>
@@ -80,78 +84,46 @@
         </div>
     </div>
 
-    <div class="outer-main">
-        <main class="mainPage">
-            <!-- <div class="announcementBanner" id="announcementBanner" style="display: none;">
-                <span class="notification">There will be no contests from May 31st to June 4th, due to me not being able to upload the contests.<br>The website will be up to date again on June 4th.</span>
-                <button role="button" type="button" class="closebtn" onclick="document.getElementById('announcementBanner').style.display = 'none'"><i class="material-icons">close</i></button>
-            </div> -->
-            <div class="titleBox">
-                <h1>Jacob's Farming Contests</h1>
-                <div class="divider"></div>
-                <p>Choose wich Crops you want to farm:</p>
-                <div class="typesBox" id="typesBox">
-                    <button type="button" data-selected="false" data-cropid="7" onclick="selectCrop(this, '<%= contests %>')"><img src="/crops/7.png" alt="pumpkin" title="Pumpkins"></button>
-                    <button type="button" data-selected="false" data-cropid="3" onclick="selectCrop(this, '<%= contests %>')"><img src="/crops/3.png" alt="melons" title="Melon"></button>
-                    <button type="button" data-selected="false" data-cropid="6" onclick="selectCrop(this, '<%= contests %>')"><img src="/crops/6.png" alt="potatoes" title="Potatoes"></button>
-                    <button type="button" data-selected="false" data-cropid="1" onclick="selectCrop(this, '<%= contests %>')"><img src="/crops/1.png" alt="carrots" title="Carrots"></button>
-                    <button type="button" data-selected="false" data-cropid="9" onclick="selectCrop(this, '<%= contests %>')"><img src="/crops/9.png" alt="wheat" title="Wheat"></button>
-                    <button type="button" data-selected="false" data-cropid="2" onclick="selectCrop(this, '<%= contests %>')"><img src="/crops/2.png" alt="COCOA BEANS" title="Cocoa Beans"></button>
-                    <button type="button" data-selected="false" data-cropid="4" onclick="selectCrop(this, '<%= contests %>')"><img src="/crops/4.png" alt="Mushrooms" title="Mushrooms"></button>
-                    <button type="button" data-selected="false" data-cropid="0" onclick="selectCrop(this, '<%= contests %>')"><img src="/crops/0.png" alt="Cactus" title="Cactus"></button>
-                    <button type="button" data-selected="false" data-cropid="8" onclick="selectCrop(this, '<%= contests %>')"><img src="/crops/8.png" alt="Cugar Cane" title="Sugar Cane"></button>
-                    <button type="button" data-selected="false" data-cropid="5" onclick="selectCrop(this, '<%= contests %>')"><img src="/crops/5.png" alt="Nether Wart" title="Nether Wart"></button>
-                </div>
-            </div>
-            <div class="contestsBox" id="contestsBox">
-                <% contests.forEach(contest => {%>
-                    <div class="contest" id="contest_<%= contest.timestamp %>" data-cropone="<%= contest.crops[0] %>" data-croptwo="<%= contest.crops[1] %>" data-cropthree="<%= contest.crops[2] %>">
-                        <p class="countDown">loading timer ...</p>
-                        <p class="date"><%= contest.timestamp %></p>
-                        <div class="crops">
-                            <img src="/crops/<%= contest.crops[0] %>.png" title="<%= cropNames[contest.crops[0]]%>" alt="<%= cropNames[contest.crops[0]]%>">
-                            <img src="/crops/<%= contest.crops[1] %>.png" title="<%= cropNames[contest.crops[1]]%>" alt="<%= cropNames[contest.crops[1]]%>">
-                            <img src="/crops/<%= contest.crops[2] %>.png" title="<%= cropNames[contest.crops[2]]%>" alt="<%= cropNames[contest.crops[2]]%>">
-                        </div>
-                        <button id="alertcontest_<%= contest.timestamp %>" title="get a notification" type="button" onclick="alarmClick('<%= contest.timestamp %>')"><i class="material-icons">notifications</i></button>
+    <main>
+        <h1>Jacob's Farming Contests</h1>
+        <div class="divider"></div>
+        <p>Wich crops do you want to farm?</p>
+        <div class="typesBox" id="typesBox">
+            <button type="button" data-selected="false" data-cropid="7" onclick="selectCrop(this, '<%= contests %>')"><img src="/assets/crops/7.png" alt="pumpkin" title="Pumpkins"></button>
+            <button type="button" data-selected="false" data-cropid="3" onclick="selectCrop(this, '<%= contests %>')"><img src="/assets/crops/3.png" alt="melons" title="Melon"></button>
+            <button type="button" data-selected="false" data-cropid="6" onclick="selectCrop(this, '<%= contests %>')"><img src="/assets/crops/6.png" alt="potatoes" title="Potatoes"></button>
+            <button type="button" data-selected="false" data-cropid="1" onclick="selectCrop(this, '<%= contests %>')"><img src="/assets/crops/1.png" alt="carrots" title="Carrots"></button>
+            <button type="button" data-selected="false" data-cropid="9" onclick="selectCrop(this, '<%= contests %>')"><img src="/assets/crops/9.png" alt="wheat" title="Wheat"></button>
+            <button type="button" data-selected="false" data-cropid="2" onclick="selectCrop(this, '<%= contests %>')"><img src="/assets/crops/2.png" alt="COCOA BEANS" title="Cocoa Beans"></button>
+            <button type="button" data-selected="false" data-cropid="4" onclick="selectCrop(this, '<%= contests %>')"><img src="/assets/crops/4.png" alt="Mushrooms" title="Mushrooms"></button>
+            <button type="button" data-selected="false" data-cropid="0" onclick="selectCrop(this, '<%= contests %>')"><img src="/assets/crops/0.png" alt="Cactus" title="Cactus"></button>
+            <button type="button" data-selected="false" data-cropid="8" onclick="selectCrop(this, '<%= contests %>')"><img src="/assets/crops/8.png" alt="Cugar Cane" title="Sugar Cane"></button>
+            <button type="button" data-selected="false" data-cropid="5" onclick="selectCrop(this, '<%= contests %>')"><img src="/assets/crops/5.png" alt="Nether Wart" title="Nether Wart"></button>
+        </div>
+
+        <div class="contestsBox" id="contestsBox">
+            <% contests.forEach(contest => {%>
+                <div class="contest" id="contest_<%= contest.timestamp %>" data-cropone="<%= contest.crops[0] %>" data-croptwo="<%= contest.crops[1] %>" data-cropthree="<%= contest.crops[2] %>">
+                    <p class="countDown">loading timer ...</p>
+                    <p class="date"><%= contest.timestamp %></p>
+                    <div class="crops">
+                        <img src="/assets/crops/<%= contest.crops[0] %>.png" title="<%= cropNames[contest.crops[0]]%>" alt="<%= cropNames[contest.crops[0]]%>">
+                        <img src="/assets/crops/<%= contest.crops[1] %>.png" title="<%= cropNames[contest.crops[1]]%>" alt="<%= cropNames[contest.crops[1]]%>">
+                        <img src="/assets/crops/<%= contest.crops[2] %>.png" title="<%= cropNames[contest.crops[2]]%>" alt="<%= cropNames[contest.crops[2]]%>">
                     </div>
-                <%});%>
-                <div class="noContests" id="noContests" style="display: none;">
-                    <h3>No contests found</h3>
-                    <p>This is probably because it has just been new year in Hypixel Skyblock.</p>
-                    <p>The contests will be updated soon.</p>
+                    <button class="alertBtn" id="alertcontest_<%= contest.timestamp %>" title="get a notification" type="button" onclick="alarmClick('<%= contest.timestamp %>')">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#fefefe" stroke-width="0.00024000000000000003"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M9.33497 4.72727V5.25342C6.64516 6.35644 4.76592 9.97935 4.83412 13.1192L4.83409 14.8631C3.45713 16.6333 3.53815 19.2727 6.9735 19.2727H9.33497C9.33497 19.996 9.61684 20.6897 10.1186 21.2012C10.6203 21.7127 11.3008 22 12.0104 22C12.72 22 13.4005 21.7127 13.9022 21.2012C14.404 20.6897 14.6858 19.996 14.6858 19.2727H17.0538C20.4826 19.2727 20.5323 16.6278 19.1555 14.8576L19.1938 13.1216C19.2631 9.97811 17.3803 6.35194 14.6858 5.25049V4.72727C14.6858 4.00396 14.404 3.31026 13.9022 2.7988C13.4005 2.28734 12.72 2 12.0104 2C11.3008 2 10.6203 2.28734 10.1186 2.7988C9.61684 3.31026 9.33497 4.00395 9.33497 4.72727ZM12.9022 4.72727C12.9022 4.74573 12.9017 4.76414 12.9006 4.78246C12.6101 4.74603 12.3142 4.72727 12.014 4.72727C11.7113 4.72727 11.413 4.74634 11.1203 4.78335C11.1192 4.76474 11.1186 4.74603 11.1186 4.72727C11.1186 4.48617 11.2126 4.25494 11.3798 4.08445C11.547 3.91396 11.7739 3.81818 12.0104 3.81818C12.2469 3.81818 12.4738 3.91396 12.641 4.08445C12.8083 4.25494 12.9022 4.48617 12.9022 4.72727ZM11.1186 19.2727C11.1186 19.5138 11.2126 19.7451 11.3798 19.9156C11.547 20.086 11.7739 20.1818 12.0104 20.1818C12.2469 20.1818 12.4738 20.086 12.641 19.9156C12.8083 19.7451 12.9022 19.5138 12.9022 19.2727H11.1186ZM17.0538 17.4545C17.8157 17.4545 18.2267 16.5435 17.7309 15.9538C17.49 15.6673 17.3616 15.3028 17.3699 14.9286L17.4106 13.0808C17.4787 9.99416 15.0427 6.54545 12.014 6.54545C8.98598 6.54545 6.55028 9.99301 6.61731 13.0789L6.65748 14.9289C6.66561 15.303 6.53726 15.6674 6.29639 15.9538C5.80054 16.5435 6.21158 17.4545 6.9735 17.4545H17.0538Z" fill="#fefefe"></path> </g></svg>
+                    </button>
                 </div>
+            <%});%>
+            <div class="noContests" id="noContests" style="display: none;">
+                <h3>No contests found</h3>
+                <p>This is probably because it has just been new year in Hypixel Skyblock.</p>
+                <p>The contests will be updated soon.</p>
             </div>
-        </main>
-    </div>
-
-    <div class="modal" id="aboutModal" style="display: none;">
-        <div class="modal-content">
-            <div class="modal-title">
-                <h3>About</h3>
-                <button onclick="toggleModal('aboutModal')" class="close">&times;</button>
-            </div>
-            <p>This website is a tracker for Hypixel Skyblock's jacobs contests (jacobs events). With this website, you have a better overview over all jacobs contests than with the ingame calender.</p>
-            <p>The data for this website has to be collected manually every Skyblock year. Therefore it can happen, that there are no contests shortly after the new year event.</p>
-            <p>If you want to use the data from this website for your own project, you can use the <a href="https://jacobs.strassburger.org/api/jacobcontests.json">/api/jacobcontests.json</a> endpoint. If you're building something public-facing (like a website, bot, app, etc.), I ask you to include a link or note somewhere in your project crediting <a href="https://jacobs.strassburger.org/">jacobs.strassburger.org</a> as your data source.</p>
-            <p>If you have any questions or suggestions, you can dm me on <a href="#" onclick="CopyToClipboard('discordtext');return false;" id="discordtext">Discord</a> or <a href="https://twitter.com/Kartoffelchipse">Twitter</a></p>
-            <p style="margin-top: 30px;">This website is not affiliated with Mojang nor Hypixel</p>
         </div>
-    </div>
+    </main>
 
-    <footer>
-        <div class="left">
-            <p>Made by <a href="https://strassburger.org/">KartoffelChips#0445</a></p>
-        </div>
-        <div class="right">
-            <a onclick="toggleModal('aboutModal')">About</a>
-            <a href="https://github.com/KartoffelChipss/jacob-contests">GitHub</a>
-            <a onclick="openConfigureCookiesModal()">Privacy Settings</a>
-        </div>
-    </footer>
-
-    <button id="themeChanger" type="button" onclick="changeTheme(this)" data-status="dark"><img src="/img/day-and-night.png"></button>
-
-    <script src="/script.js"></script>
+    <script src="/assets/script.js"></script>
 </body>
 </html>

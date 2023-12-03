@@ -1,0 +1,432 @@
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;500;600;700;800&display=swap");
+:root {
+  --main-color-1: #0088F5;
+  --main-color-2: #0088F5;
+  --sec-color-1: #4A4453;
+  --sec-color-2: #858486;
+  --grey: #36393f;
+  --white: #f5f5f5;
+  --font-color: #e0e0e0;
+  --background-color: #1b1b1d;
+  --font-color-wbg: #e0e0e0;
+  --contest-bg: #292929;
+}
+
+::-moz-selection { /* For Firefox*/
+  color: #f5f5f5;
+  background: var(--main-color-2);
+}
+
+::selection {
+  color: #f5f5f5;
+  background: var(--main-color-2);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Sora", sans-serif;
+  font-weight: 700;
+  font-size: larger;
+  line-height: 1;
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  color: var(--font-color);
+  background-color: var(--background-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+p {
+  font-size: 14px;
+  color: var(--font-color);
+}
+
+h1 {
+  color: var(--font-color);
+}
+
+button {
+  color: var(--font-color);
+}
+
+@supports not selector(:focus-visible) {
+  a:focus {
+    outline: var(--main-color-2) 2px solid;
+    outline-offset: 2px;
+  }
+  button:focus {
+    outline: var(--main-color-2) 2px solid;
+  }
+}
+a:focus-visible {
+  outline: var(--main-color-2) 2px solid;
+  outline-offset: 2px;
+}
+
+button:focus-visible {
+  outline: var(--main-color-2) 2px solid;
+}
+
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--background-color);
+  transition: opacity 0.75s, visibility 0.75s;
+  transform: scaleX(1);
+}
+
+.loader--hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loader::after {
+  content: "";
+  width: 75px;
+  height: 75px;
+  border: 15px solid transparent;
+  border-top-color: var(--main-color-2);
+  border-radius: 50%;
+  animation: loading 0.75s ease infinite;
+}
+
+@keyframes loading {
+  from {
+    transform: rotate(0turn);
+  }
+  to {
+    transform: rotate(1turn);
+  }
+}
+.announcementBanner {
+  width: 100%;
+  position: relative;
+  text-align: center;
+  margin-top: 25px;
+  padding: 15px;
+  border-radius: 7px;
+  background-color: #9761EC;
+  color: var(--font-color);
+  font-size: 18px;
+  line-height: 1.5;
+}
+.announcementBanner .closebtn {
+  background-color: transparent;
+  color: var(--font-color);
+  border: none;
+  position: absolute;
+  top: 5px;
+  right: 2.5px;
+}
+
+.cookieBanner {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 0;
+  left: 0;
+  z-index: 20;
+  width: 100%;
+  background-color: #1c1d1f;
+  color: var(--white);
+  line-height: 1.3;
+  font-family: "Sora", sans-serif;
+  box-shadow: 0px -2px 10px 12px rgba(0, 0, 0, 0.52);
+}
+.cookieBanner .inner {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+}
+@media screen and (max-width: 1280px) {
+  .cookieBanner .inner {
+    flex-direction: column;
+  }
+}
+.cookieBanner .buttons {
+  margin-left: 50px;
+}
+@media screen and (max-width: 1280px) {
+  .cookieBanner .buttons {
+    margin-left: 0;
+    margin-top: 15px;
+  }
+}
+.cookieBanner .buttons button {
+  border: none;
+  padding: 13px;
+  font-size: 16px;
+  margin-left: 10px;
+  transition: transform 0.1s ease-in-out;
+}
+.cookieBanner .buttons .acceptAll {
+  background-color: var(--main-color-2);
+}
+@media screen and (max-width: 430px) {
+  .cookieBanner .buttons .acceptAll {
+    margin-left: 0;
+  }
+}
+.cookieBanner .buttons .acceptAll:hover {
+  transform: scale(1.05);
+}
+.cookieBanner .buttons .rejectAll {
+  background-color: var(--grey);
+}
+.cookieBanner .buttons .rejectAll:hover {
+  transform: scale(1.05);
+}
+.cookieBanner .buttons .configure {
+  background-color: transparent;
+  padding: 0;
+}
+@media screen and (max-width: 430px) {
+  .cookieBanner .buttons .configure {
+    margin: 25px 0;
+    margin-bottom: 10px;
+  }
+}
+.cookieBanner .buttons .configure:hover {
+  color: #cecece;
+}
+.cookieBanner .content {
+  display: flex;
+  flex-direction: column;
+}
+.cookieBanner .content .cookieCheckboxDiv {
+  display: flex;
+  align-items: center;
+}
+.cookieBanner .content .cookieCheckboxDiv label {
+  margin: 0;
+  font-size: 16px;
+}
+.cookieBanner .titleBar {
+  display: flex;
+  align-items: center;
+}
+.cookieBanner .titleBar img {
+  height: 45px;
+}
+.cookieBanner .titleBar h3 {
+  font-size: 26px;
+  margin: 0;
+  margin-left: 7px;
+}
+
+.cookieModal {
+  display: none;
+  position: fixed;
+  z-index: 50;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.cookieModal .content {
+  background-color: #36393f;
+  background-size: cover;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #dbdbdb;
+  width: 80%;
+  color: #f5f5f5;
+}
+.cookieModal h3 {
+  margin: 0;
+  border-radius: 5px;
+  padding-bottom: 10px;
+  font-weight: 600;
+  font-size: 27px;
+  border-bottom: var(--sec-color-2) 5px solid;
+}
+.cookieModal .buttons {
+  margin-top: 25px;
+  display: flex;
+}
+@media screen and (max-width: 440px) {
+  .cookieModal .buttons {
+    flex-direction: column;
+  }
+}
+.cookieModal .buttons button {
+  border: none;
+  padding: 13px;
+  font-size: 16px;
+  margin-left: 10px;
+  transition: transform 0.1s ease-in-out;
+}
+.cookieModal .buttons .acceptAll {
+  background-color: #1c1d1f;
+}
+@media screen and (max-width: 440px) {
+  .cookieModal .buttons .acceptAll {
+    margin: 0;
+    margin-bottom: 10px;
+  }
+}
+.cookieModal .buttons .acceptAll:hover {
+  transform: scale(1.05);
+}
+.cookieModal .buttons .rejectAll {
+  background-color: #1c1d1f;
+}
+@media screen and (max-width: 440px) {
+  .cookieModal .buttons .rejectAll {
+    margin: 0;
+    margin-bottom: 10px;
+  }
+}
+.cookieModal .buttons .rejectAll:hover {
+  transform: scale(1.05);
+}
+.cookieModal .buttons .saveSettings {
+  background-color: var(--main-color-2);
+}
+@media screen and (max-width: 440px) {
+  .cookieModal .buttons .saveSettings {
+    margin: 0;
+    margin-bottom: 10px;
+  }
+}
+.cookieModal .buttons .saveSettings:hover {
+  transform: scale(1.05);
+}
+.cookieModal .cookieCheckboxDiv {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+.cookieModal .cookieCheckboxDiv div {
+  display: flex;
+  align-items: center;
+}
+.cookieModal .cookieCheckboxDiv div label {
+  margin: 0;
+  font-size: 20px;
+}
+.cookieModal .cookieCheckboxDiv p {
+  font-size: 16px;
+  margin: 0;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #36393f;
+  background-size: cover;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #dbdbdb;
+  width: 80%;
+  color: #f5f5f5;
+}
+.modal-content h3 {
+  font-size: 27px;
+  font-weight: 600;
+  margin: 0;
+  margin-bottom: 15px;
+}
+.modal-content p {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.5;
+  margin: 0;
+  margin-bottom: 15px;
+}
+.modal-content a {
+  color: var(--main-color-1);
+}
+
+.modal-title {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.close {
+  color: #f5f5f5;
+  font-size: 35px;
+  border: none;
+  background: none;
+  position: absolute;
+  top: 15px;
+  right: 25px;
+}
+
+.close:hover, .close:focus {
+  color: #dbdbdb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-active {
+  display: block;
+}
+
+.toggle-box {
+  transform: scale(0.4);
+  display: block;
+  width: -moz-min-content;
+  width: min-content;
+  margin: 0;
+  margin-left: -28px;
+}
+.toggle-box input[type=checkbox] {
+  position: relative;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  width: 100px;
+  height: 50px;
+  background: #ccc;
+  border-radius: 50px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: 0.4s;
+}
+.toggle-box input:checked[type=checkbox] {
+  background: var(--main-color-2);
+}
+.toggle-box input[type=checkbox]::after {
+  position: absolute;
+  content: "";
+  width: 50px;
+  height: 50px;
+  top: 0;
+  left: 0;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  transform: scale(1.1);
+  transition: 0.4s;
+}
+.toggle-box input:checked[type=checkbox]::after {
+  left: 50%;
+}/*# sourceMappingURL=assets.css.map */
