@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;500;600;700;800&display=swap');
 
 :root {
-    --main-color-1: #0088F5;
-    --main-color-2: #0088F5;
+    --main-color-1: #cdb159;
+    --main-color-2: #cdb159;
     --sec-color-1: #4A4453;
     --sec-color-2: #858486;
 
@@ -14,15 +14,15 @@
     --contest-bg: #292929;
 }
 
-::-moz-selection { /* For Firefox*/
-    color: #f5f5f5;
-    background: var(--main-color-2);
-}
+// ::-moz-selection { /* For Firefox*/
+//     color: #f5f5f5;
+//     background: var(--main-color-2);
+// }
 
-::selection {
-  color: #f5f5f5;
-  background: var(--main-color-2);
-}
+// ::selection {
+//   color: #f5f5f5;
+//   background: var(--main-color-2);
+// }
 
 html {
     scroll-behavior: smooth;
@@ -56,6 +56,15 @@ h1 {
 
 button {
     color: var(--font-color);
+    font-family: 'Sora', sans-serif;
+}
+
+.textBtn {
+    background-color: transparent;
+    border: none;
+    text-align: left;
+    padding: 0;
+    margin: 0;
 }
 
 @supports not selector(:focus-visible) {
@@ -461,5 +470,110 @@ button:focus-visible {
     
     input:checked[type="checkbox"]::after {
         left: 50%;
+    }
+}
+
+/* --- Footer --- */
+body>footer {
+    position: sticky;
+    top: 100vh;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    background-color: rgba(255, 255, 255, 0.01);
+    width: 100%;
+
+    .inner {
+        max-width: 1200px;
+        width: calc(100% - 25px * 2);
+        display: flex;
+        justify-content: space-between;
+        padding: 50px 25px;
+    }
+
+    .column {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        margin: 0 50px;
+
+        h4 {
+            font-size: 18px;
+            margin: 0;
+            margin-bottom: 10px;
+            color: var(--main-color-1);
+            margin-top: 5px;
+            font-weight: 700;
+        }
+
+        a, button {
+            color: var(--light-grey);
+            text-decoration: none;
+            margin-top: 10px;   
+            font-size: 18px;
+            font-weight: 600;
+
+            &.socialmedia {
+                margin-top: 15px;
+                margin-right: 7px;
+                svg {
+                    height: 25px;
+                    width: 25px;
+                }
+            }
+        }
+
+        &:first-of-type {
+            img {
+                height: 30px;
+                width: 30px;
+                margin-right: 15px;
+            }
+
+            h3 {
+                margin: 0;
+                font-size: 24px;
+                font-weight: 600;
+                color: var(--main-color-1);
+            }
+
+            .by {
+                font-size: 16px;
+                font-weight: 500;
+                margin-top: 15px;
+
+                a {
+                    font-size: 16px;
+                    font-weight: 600;
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+
+    .flex {
+        display: flex;
+        align-items: center;
+    }
+
+    .copyright {
+        font-size: 14px;
+        color: var(--light-grey);
+        margin-top: 15px;
+    }
+
+    @media screen and (max-width: 650px) {
+        .inner {
+            flex-direction: column;
+            padding: 25px;
+        }
+
+        .column {
+            margin: 0;
+            margin: 15px 0;
+        }
     }
 }

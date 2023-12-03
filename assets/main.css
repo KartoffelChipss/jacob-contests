@@ -11,6 +11,12 @@ main {
 main h1 {
   font-size: 43px;
   margin: 20px 0;
+  text-align: center;
+}
+@media screen and (max-width: 600px) {
+  main h1 {
+    font-size: 37px;
+  }
 }
 main .divider {
   height: 5px;
@@ -33,6 +39,7 @@ main .typesBox {
   background-color: rgba(255, 255, 255, 0.03);
   padding: 7px;
   border-radius: 7px;
+  gap: 5px;
 }
 main .typesBox button {
   background-color: transparent;
@@ -40,8 +47,7 @@ main .typesBox button {
   background-color: transparent;
   border-radius: 7px;
   transition: background 0.1s ease-in-out;
-  padding: 10px;
-  margin: 0 5px;
+  padding: 5px;
 }
 main .typesBox button img {
   height: 45px;
@@ -66,17 +72,34 @@ main .contestsBox {
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 1400px;
+  max-width: 1000px;
+  margin: 50px 0;
 }
 main .contestsBox .contest {
-  width: 100%;
+  --padding: 5px;
+  width: calc(100% - var(--padding) * 2);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 15px;
+  background-color: rgba(255, 255, 255, 0.03);
+  border-radius: 7px;
+  padding: var(--padding) 15px;
+}
+main .contestsBox .contest:last-of-type {
+  margin-bottom: 0;
+}
+main .contestsBox .contest p {
+  font-weight: 600;
+  font-size: 17px;
+}
+main .contestsBox .contest p.countDown {
+  min-width: 126px;
 }
 main .contestsBox .contest .crops {
   display: flex;
   align-items: center;
+  gap: 7px;
 }
 main .contestsBox .contest .crops img {
   height: 45px;

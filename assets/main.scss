@@ -13,6 +13,13 @@ main {
     h1 {
         font-size: 43px;
         margin: 20px 0;
+        text-align: center;
+
+        //color: var(--main-color-1);
+
+        @media screen and (max-width: 600px) {
+            font-size: 37px;
+        }
     }
 
     .divider {
@@ -40,6 +47,7 @@ main {
 
         padding: 7px;
         border-radius: 7px;
+        gap: 5px;
 
         button {
             background-color: transparent;
@@ -48,8 +56,7 @@ main {
             border-radius: 7px;
             transition: background .1s ease-in-out;
 
-            padding: 10px;
-            margin: 0 5px;
+            padding: 5px;
             
             img {
                 height: 45px;
@@ -82,18 +89,40 @@ main {
         display: flex;
         flex-direction: column;
         width: 100%;
-        max-width: 1400px;
+        max-width: 1000px;
+
+        margin: 50px 0;
 
         .contest {
-            width: 100%;
+            --padding: 5px;
+            width: calc(100% - var(--padding) * 2);
 
             display: flex;
             align-items: center;
             justify-content: space-between;
+            margin-bottom: 15px;
+
+            background-color: rgba(255,255,255, .03);
+            border-radius: 7px;
+            padding: var(--padding) 15px;
+
+            &:last-of-type {
+                margin-bottom: 0;
+            }
+
+            p {
+                font-weight: 600;
+                font-size: 17px;
+
+                &.countDown {
+                    min-width: 126px;
+                }
+            }
 
             .crops {
                 display: flex;
                 align-items: center;
+                gap: 7px;
 
                 img {
                     height: 45px;
