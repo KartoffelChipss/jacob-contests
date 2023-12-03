@@ -35,6 +35,7 @@ main {
         margin: 20px 0;
         font-size: 18px;
         font-weight: 400;
+        text-align: center;
     }
 
     .typesBox {
@@ -139,6 +140,23 @@ main {
                 svg {
                     width: 25px;
                     height: 25px;
+                }
+            }
+
+            @media screen and (max-width: 650px) {
+                flex-direction: column;
+                padding: 15px;
+
+                p {
+                    margin: 10px 0;
+                }
+
+                .crops {
+                    margin: 10px 0;
+                }
+
+                .alertBtn {
+                    display: none;
                 }
             }
         }

@@ -30,6 +30,7 @@ main p {
   margin: 20px 0;
   font-size: 18px;
   font-weight: 400;
+  text-align: center;
 }
 main .typesBox {
   display: flex;
@@ -114,4 +115,19 @@ main .contestsBox .contest .alertBtn {
 main .contestsBox .contest .alertBtn svg {
   width: 25px;
   height: 25px;
+}
+@media screen and (max-width: 650px) {
+  main .contestsBox .contest {
+    flex-direction: column;
+    padding: 15px;
+  }
+  main .contestsBox .contest p {
+    margin: 10px 0;
+  }
+  main .contestsBox .contest .crops {
+    margin: 10px 0;
+  }
+  main .contestsBox .contest .alertBtn {
+    display: none;
+  }
 }/*# sourceMappingURL=main.css.map */

@@ -22,66 +22,13 @@ window.addEventListener("load", () => {
     });
 });
 
-/*--- theme changer ---*/
-const themeChanger = document.getElementById("themeChanger");
-function changeTheme(clickedEle) {
-    let r = document.querySelector(':root');
-
-    if (clickedEle.dataset.status === "dark") {
-        clickedEle.getElementsByTagName("img")[0].style.filter = "invert(0%)";
-        r.style.setProperty("--background-color", "#f5f5f5");
-        r.style.setProperty("--font-color-wbg", "#111");
-        r.style.setProperty("--contest-bg", "#d4d4d4");
-        clickedEle.dataset.status = "light";
-
-        if (getCookie("privacySettings") && getCookie("privacySettings").split(".")[1] === "y") {
-            document.cookie = "theme=light";
-        }
-    } else {
-        clickedEle.getElementsByTagName("img")[0].style.filter = "invert(100%)";
-        r.style.setProperty("--background-color", "#36393f");
-        r.style.setProperty("--font-color-wbg", "#e0e0e0");
-        r.style.setProperty("--contest-bg", "#292929");
-        clickedEle.dataset.status = "dark";
-
-        if (getCookie("privacySettings") && getCookie("privacySettings").split(".")[1] === "y") {
-            document.cookie = "theme=dark";
-        }
-    }
-}
-
-function setTheme(themeChangerEle, theme) {
-    let r = document.querySelector(':root');
-    if (theme === "light") {
-        themeChangerEle.getElementsByTagName("img")[0].style.filter = "invert(0%)";
-        r.style.setProperty("--background-color", "#f5f5f5");
-        r.style.setProperty("--font-color-wbg", "#111");
-        r.style.setProperty("--contest-bg", "#d4d4d4");
-        themeChangerEle.dataset.status = "light";
-    } else {
-        themeChangerEle.getElementsByTagName("img")[0].style.filter = "invert(100%)";
-        r.style.setProperty("--background-color", "#36393f");
-        r.style.setProperty("--font-color-wbg", "#e0e0e0");
-        r.style.setProperty("--contest-bg", "#292929");
-        themeChangerEle.dataset.status = "dark";
-    }
-}
-
-let theme = getCookie("theme");
-if (theme) {
-    setTheme(themeChanger, theme);
-}
-
 /*--- modals ---*/
 var closeBTN = document.getElementsByClassName("close")[0];
 
 function toggleModal(modal_id) {
     const modal = document.getElementById(modal_id);
-    if (modal.style.display === "none") {
-        modal.style.display = "block";
-    } else {
-        modal.style.display = "none";
-    }
+    if (modal.classList.contains("_shown")) modal.classList.remove("_shown");
+    else modal.classList.add("_shown");
 }
 
 function CopyToClipboard(id) {
@@ -279,66 +226,4 @@ function createAlarm(timestamp) {
         //alarmbtn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#fefefe"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12 5.5C14.7614 5.5 17 7.73858 17 10.5V12.7396C17 13.2294 17.1798 13.7022 17.5052 14.0683L18.7808 15.5035C19.6407 16.4708 18.954 18 17.6597 18H6.34025C5.04598 18 4.35927 16.4708 5.21913 15.5035L6.4948 14.0683C6.82022 13.7022 6.99998 13.2294 6.99998 12.7396L7 10.5C7 7.73858 9.23858 5.5 12 5.5ZM12 5.5V3M10.9999 21H12.9999" stroke="#fefefe" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>`;
         alarmbtn.innerHTML = "NoNotify3"
     }, timeBetween)
-}
-
-function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
-}
-
-const cookieBanner = document.getElementById("cookieBanner");
-const cookieModal = document.getElementById("cookieModal");
-// necessary.functional.statistics.marketing
-
-function acceptAllCookies() {
-    document.cookie = `privacySettings=${encodeURIComponent("y.y.y.n")}`;
-    cookieBanner.style.display = "none";
-    cookieModal.style.display = "none";
-}
-
-function rejectAllCookies() {
-    document.cookie = `privacySettings=${encodeURIComponent("y.n.n.n")}`;
-    cookieBanner.style.display = "none";
-    cookieModal.style.display = "none";
-}
-
-function openConfigureCookiesModal() {
-    cookieModal.style.display = "block";
-    cookieBanner.style.display = "none";
-}
-
-const necessaryCookiesInput = document.getElementById("necessaryCookiesInput");
-const functionalCookiesInput = document.getElementById("functionalCookiesInput");
-const statisticsCookiesInput = document.getElementById("statisticsCookiesInput");
-
-function saveCookieSettings() {
-    let privacystring = "";
-    if (necessaryCookiesInput.checked) {
-        privacystring = privacystring + "y.";
-    } else {
-        privacystring = privacystring + "n.";
-    }
-
-    if (functionalCookiesInput.checked) {
-        privacystring = privacystring + "y.";
-    } else {
-        privacystring = privacystring + "n.";
-    }
-
-    if (statisticsCookiesInput.checked) {
-        privacystring = privacystring + "y.";
-    } else {
-        privacystring = privacystring + "n.";
-    }
-
-    privacystring = privacystring + "n";//marketing
-
-    document.cookie = `privacySettings=${encodeURIComponent(privacystring)}`;
-    cookieBanner.style.display = "none";
-    cookieModal.style.display = "none";
-}
-
-if (!getCookie("privacySettings")) {
-    cookieBanner.style.display = "flex";
 }

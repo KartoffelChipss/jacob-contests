@@ -362,73 +362,54 @@ button:focus-visible {
 }
 
 .modal {
-    display: none;
     position: fixed;
-    z-index: 2;
-    left: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
     top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.4);
-}
+    z-index: 10;
 
-.modal-content {
-    background-color: #36393f;
-    background-size: cover;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #dbdbdb;
-    width: 80%;
-    color: #f5f5f5;
+    overflow-y: auto;
 
-    h3 {
-        font-size: 27px;
-        font-weight: 600;
-        margin: 0;
-        margin-bottom: 15px;
+    background-color: rgba(0,0,0,0.5);
+
+    &._shown {
+        display: flex;
     }
 
-    p {
-        font-size: 18px;
-        font-weight: 500;
-        line-height: 1.5;
-        margin: 0;
-        margin-bottom: 15px;
+    .content {
+        --padding: 25px;
+        width: calc(90% - var(--padding) * 2);
+        max-width: 1000px;
+        background-color: var(--background-color);
+        padding: var(--padding);
+        border-radius: 7px;
+
+        h3 {
+            font-size: 28px;
+            font-weight: 600;
+            margin: 0;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.3;
+        }
+
+        button.close {
+            top: 0px;
+            right: 0px;
+
+            svg {
+                height: 30px;
+                width: 30px;
+            }
+        }
     }
-
-    a {
-        color: var(--main-color-1);
-    }
-    
-} 
-
-.modal-title {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    //margin-top: 15px;
-}
-
-.close {
-    color: #f5f5f5;
-    font-size: 35px;
-    border: none;
-    background: none;
-    position: absolute;
-    top: 15px;
-    right: 25px;
-}
-
-.close:hover, .close:focus {
-    color: #dbdbdb;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.modal-active {
-    display: block;
 }
 
 .toggle-box {
