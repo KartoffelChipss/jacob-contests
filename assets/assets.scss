@@ -33,9 +33,11 @@ body {
     font-weight: 700;
     font-size: larger;
     line-height: 1.0;
-    height: 100vh;
     width: 100%;
     position: relative;
+
+    padding: 0;
+    margin: 0;
 
     color: var(--font-color);
     background-color: var(--background-color);
@@ -48,6 +50,16 @@ body {
 p {
     font-size: 14px;
     color: var(--font-color);
+}
+
+a {
+    font-family: 'Sora', sans-serif;
+    color: var(--main-color-1);
+    text-decoration: none;
+
+    &:hover {
+        filter: brightness(.8);
+    }
 }
 
 h1 {
@@ -362,10 +374,9 @@ button:focus-visible {
 }
 
 .modal {
-    position: fixed;
+    position: absolute;
     display: none;
     justify-content: center;
-    align-items: center;
     top: 0;
     left: 0;
     width: 100%;
@@ -384,8 +395,12 @@ button:focus-visible {
         --padding: 25px;
         width: calc(90% - var(--padding) * 2);
         max-width: 1000px;
-        background-color: var(--background-color);
+        position: relative;
+        height: min-content;
+        margin: 50px 0;
         padding: var(--padding);
+        
+        background-color: var(--background-color);
         border-radius: 7px;
 
         h3 {
@@ -401,8 +416,13 @@ button:focus-visible {
         }
 
         button.close {
-            top: 0px;
-            right: 0px;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+
+            background-color: transparent;
+            border: none;
+            color: var(--font-color);
 
             svg {
                 height: 30px;
@@ -496,6 +516,7 @@ footer {
             margin-top: 10px;   
             font-size: 18px;
             font-weight: 600;
+            transition: filter .2s ease-in-out;
 
             &.socialmedia {
                 margin-top: 15px;
@@ -504,6 +525,11 @@ footer {
                     height: 25px;
                     width: 25px;
                 }
+            }
+
+            &:hover {
+                cursor: pointer;
+                filter: brightness(.8);
             }
         }
 
@@ -552,9 +578,24 @@ footer {
             padding: 25px;
         }
 
+        .column:first-of-type {
+            img {
+                display: none;
+            }
+
+            h3 {
+                font-size: 20px;
+            }
+        }
+
         .column {
             margin: 0;
             margin: 15px 0;
+        }
+
+        .lastcolumns {
+            flex-direction: column;
+            align-items: flex-start;
         }
     }
 }

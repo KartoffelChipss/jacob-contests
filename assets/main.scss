@@ -95,7 +95,7 @@ main {
         margin: 50px 0;
 
         .contest {
-            --padding: 5px;
+            --padding: 15px;
             width: calc(100% - var(--padding) * 2);
 
             display: flex;
@@ -105,7 +105,7 @@ main {
 
             background-color: rgba(255,255,255, .03);
             border-radius: 7px;
-            padding: var(--padding) 15px;
+            padding: 5px var(--padding);
 
             &:last-of-type {
                 margin-bottom: 0;

@@ -29,6 +29,7 @@ function toggleModal(modal_id) {
     const modal = document.getElementById(modal_id);
     if (modal.classList.contains("_shown")) modal.classList.remove("_shown");
     else modal.classList.add("_shown");
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
 }
 
 function CopyToClipboard(id) {
