@@ -48,6 +48,9 @@ main .typesBox button {
   background-color: transparent;
   border-radius: 7px;
   transition: background 0.1s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 5px;
 }
 main .typesBox button img {
@@ -68,6 +71,9 @@ main .typesBox button:first-of-type {
 }
 main .typesBox button:last-of-type {
   margin-right: 0;
+}
+main .typesBox button:hover {
+  cursor: pointer;
 }
 main .contestsBox {
   display: flex;
@@ -115,6 +121,9 @@ main .contestsBox .contest .alertBtn {
 main .contestsBox .contest .alertBtn svg {
   width: 25px;
   height: 25px;
+}
+main .contestsBox .contest .alertBtn:hover {
+  cursor: pointer;
 }
 @media screen and (max-width: 650px) {
   main .contestsBox .contest {

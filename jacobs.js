@@ -84,6 +84,10 @@ app.get("/", (req, res) => {
     });
 });
 
+app.get("/legalnotice", (req, res) => {
+    renderTemplate(res, req, "legalnotice.ejs", {});
+});
+
 app.get(["/api/jacobcontests", "/api/jacobcontests.json"], (req, res) => {
     fs.readFile('./api/jacobcontests.json', function read(err, data) {
         if (err) {

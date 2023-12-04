@@ -1,0 +1,25 @@
+@import url("./assets.css");
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+main .inner {
+  --padding: 15px;
+  width: calc(100% - var(--padding) * 2);
+  padding: var(--padding);
+  max-width: 1300px;
+  margin-bottom: 50px;
+}
+main p {
+  font-size: 20px;
+  line-height: 1.2;
+}
+main h3 {
+  font-size: 24px;
+}
+main h2 {
+  font-size: 30px;
+  color: var(--main-color-1);
+}/*# sourceMappingURL=legal.css.map */

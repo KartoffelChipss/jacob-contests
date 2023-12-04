@@ -48,7 +48,7 @@ const typesBox = document.getElementById("typesBox");
 const contestsBox = document.getElementById("contestsBox");
 let allowedCrops = [];
 
-function selectCrop(clickedEle, contests) {
+function selectCrop(clickedEle) {
 
     if (clickedEle.dataset.selected === "false") {// add a Filter
         clickedEle.dataset.selected = "true";

@@ -46,6 +46,25 @@ a:hover {
   filter: brightness(0.8);
 }
 
+a.button {
+  background-color: var(--main-color-1);
+  color: #ffffff;
+  padding: 10px 15px;
+  border-radius: 3px;
+  font-size: 18px;
+  transition: filter 0.2s ease-in-out;
+}
+a.button.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+a.button.icon svg {
+  height: 20px;
+  width: 20px;
+  margin-right: 7px;
+}
+
 h1 {
   color: var(--font-color);
 }
@@ -383,6 +402,9 @@ button:focus-visible {
   height: 30px;
   width: 30px;
 }
+.modal .content button.close:hover {
+  cursor: pointer;
+}
 
 .toggle-box {
   transform: scale(0.4);
@@ -425,13 +447,68 @@ button:focus-visible {
   left: 50%;
 }
 
+/* --- Nav ---*/
+nav {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+nav .inner {
+  --padding: 15px;
+  width: calc(100% - var(--padding) * 2);
+  max-width: 1300px;
+  padding: var(--padding);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+nav .inner .titlebox {
+  display: flex;
+  align-items: center;
+}
+nav .inner .titlebox .logo {
+  height: 43px;
+  margin-right: 10px;
+}
+nav .inner .titlebox h1 {
+  font-size: 30px;
+}
+nav .inner .rightbox {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+nav .inner .rightbox a {
+  color: var(--font-color);
+}
+@media screen and (max-width: 900px) {
+  nav .inner .rightbox {
+    display: none;
+  }
+}
+@media screen and (max-width: 900px) {
+  nav .inner {
+    justify-content: center;
+    margin-bottom: -30px;
+  }
+  nav .inner h1 {
+    text-align: center;
+  }
+  nav .inner .logo {
+    display: none;
+  }
+}
+
 /* --- Footer --- */
-body > footer {
-  position: sticky;
-  top: 100vh;
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
 }
 
 footer {
+  margin-top: auto;
   display: flex;
   justify-content: center;
   flex-direction: row;

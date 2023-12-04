@@ -19,87 +19,60 @@
     <meta property="og:url" content="https://jacobs.strassburger.dev/">
     <meta property="og:description" content="This is a tracker to get an overview of the upcoming Jacobs farming contests with the ability to filter by crops. You can get a better overview over all jacobs farming events with the times automatically adjusting to your timezone.">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="https://jacobs.strassburger.dev/img/preview.png">
+    <meta property="og:image" content="https://jacobs.strassburger.dev/assets/img/preview.png">
 
     <link href="/assets/main.css" rel="stylesheet">
 </head>
 <body>
     <div class="loader"></div>
 
-    <div class="modal" id="aboutModal">
-        <div class="content">
-            <button onclick="toggleModal('aboutModal')" class="close"><svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" fill="#fefefe" stroke="#fefefe" stroke-width="0.01024"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path fill="#fefefe" d="M195.2 195.2a64 64 0 0 1 90.496 0L512 421.504 738.304 195.2a64 64 0 0 1 90.496 90.496L602.496 512 828.8 738.304a64 64 0 0 1-90.496 90.496L512 602.496 285.696 828.8a64 64 0 0 1-90.496-90.496L421.504 512 195.2 285.696a64 64 0 0 1 0-90.496z"></path></g></svg></button>
-            <h3>About</h3>
-            <p>This website is a tracker for Hypixel Skyblock's jacobs contests (jacobs events). With this website, you have a better overview over all jacobs contests than with the ingame calender.</p>
-            <p>The data for this website has to be collected manually every Skyblock year. Therefore it can happen, that there are no contests shortly after the new year event.</p>
-            <p>If you want to use the data from this website for your own project, you can use the <a href="https://jacobs.strassburger.dev/api/jacobcontests">/api/jacobcontests</a> endpoint. If you're building something public-facing (like a website, bot, app, etc.), I ask you to include a link or note somewhere in your project crediting <a href="https://jacobs.strassburger.dev/">jacobs.strassburger.dev</a> as your data source.</p>
-            <p>If you have any questions or suggestions, you can dm me on <a href="https://discord.com/users/490192247552475136">Discord</a> or <a href="https://twitter.com/Kartoffelchipse">Twitter</a></p>
-            <p style="margin-top: 30px;">This website is not affiliated with Mojang nor Hypixel</p>
-        </div>
-    </div>
+    <%- include("partials/aboutModal.ejs") %>
 
-    <main>
-        <h1>Jacob's Farming Contests</h1>
-        <div class="divider"></div>
-        <p>Wich crops do you want to farm?</p>
-        <div class="typesBox" id="typesBox">
-            <button type="button" data-selected="false" data-cropid="7" onclick="selectCrop(this, '<%= contests %>')"><img src="/assets/crops/7.png" alt="pumpkin" title="Pumpkins"></button>
-            <button type="button" data-selected="false" data-cropid="3" onclick="selectCrop(this, '<%= contests %>')"><img src="/assets/crops/3.png" alt="melons" title="Melon"></button>
-            <button type="button" data-selected="false" data-cropid="6" onclick="selectCrop(this, '<%= contests %>')"><img src="/assets/crops/6.png" alt="potatoes" title="Potatoes"></button>
-            <button type="button" data-selected="false" data-cropid="1" onclick="selectCrop(this, '<%= contests %>')"><img src="/assets/crops/1.png" alt="carrots" title="Carrots"></button>
-            <button type="button" data-selected="false" data-cropid="9" onclick="selectCrop(this, '<%= contests %>')"><img src="/assets/crops/9.png" alt="wheat" title="Wheat"></button>
-            <button type="button" data-selected="false" data-cropid="2" onclick="selectCrop(this, '<%= contests %>')"><img src="/assets/crops/2.png" alt="COCOA BEANS" title="Cocoa Beans"></button>
-            <button type="button" data-selected="false" data-cropid="4" onclick="selectCrop(this, '<%= contests %>')"><img src="/assets/crops/4.png" alt="Mushrooms" title="Mushrooms"></button>
-            <button type="button" data-selected="false" data-cropid="0" onclick="selectCrop(this, '<%= contests %>')"><img src="/assets/crops/0.png" alt="Cactus" title="Cactus"></button>
-            <button type="button" data-selected="false" data-cropid="8" onclick="selectCrop(this, '<%= contests %>')"><img src="/assets/crops/8.png" alt="Cugar Cane" title="Sugar Cane"></button>
-            <button type="button" data-selected="false" data-cropid="5" onclick="selectCrop(this, '<%= contests %>')"><img src="/assets/crops/5.png" alt="Nether Wart" title="Nether Wart"></button>
-        </div>
+    <div class="container">
+        <%- include("partials/nav.ejs") %>
 
-        <div class="contestsBox" id="contestsBox">
-            <% contests.forEach(contest => {%>
-                <div class="contest" id="contest_<%= contest.timestamp %>" data-cropone="<%= contest.crops[0] %>" data-croptwo="<%= contest.crops[1] %>" data-cropthree="<%= contest.crops[2] %>">
-                    <p class="countDown">loading timer ...</p>
-                    <p class="date"><%= contest.timestamp %></p>
-                    <div class="crops">
-                        <img src="/assets/crops/<%= contest.crops[0] %>.png" title="<%= cropNames[contest.crops[0]]%>" alt="<%= cropNames[contest.crops[0]]%>">
-                        <img src="/assets/crops/<%= contest.crops[1] %>.png" title="<%= cropNames[contest.crops[1]]%>" alt="<%= cropNames[contest.crops[1]]%>">
-                        <img src="/assets/crops/<%= contest.crops[2] %>.png" title="<%= cropNames[contest.crops[2]]%>" alt="<%= cropNames[contest.crops[2]]%>">
+        <main>
+            <!-- <h1>Jacob's Farming Contests</h1>
+            <div class="divider"></div> -->
+            <p>Wich crops do you want to farm?</p>
+            <div class="typesBox" id="typesBox">
+                <button type="button" data-selected="false" data-cropid="7" onclick="selectCrop(this)"><img src="/assets/crops/7.png" alt="pumpkin" title="Pumpkins"></button>
+                <button type="button" data-selected="false" data-cropid="3" onclick="selectCrop(this)"><img src="/assets/crops/3.png" alt="melons" title="Melon"></button>
+                <button type="button" data-selected="false" data-cropid="6" onclick="selectCrop(this)"><img src="/assets/crops/6.png" alt="potatoes" title="Potatoes"></button>
+                <button type="button" data-selected="false" data-cropid="1" onclick="selectCrop(this)"><img src="/assets/crops/1.png" alt="carrots" title="Carrots"></button>
+                <button type="button" data-selected="false" data-cropid="9" onclick="selectCrop(this)"><img src="/assets/crops/9.png" alt="wheat" title="Wheat"></button>
+                <button type="button" data-selected="false" data-cropid="2" onclick="selectCrop(this)"><img src="/assets/crops/2.png" alt="COCOA BEANS" title="Cocoa Beans"></button>
+                <button type="button" data-selected="false" data-cropid="4" onclick="selectCrop(this)"><img src="/assets/crops/4.png" alt="Mushrooms" title="Mushrooms"></button>
+                <button type="button" data-selected="false" data-cropid="0" onclick="selectCrop(this)"><img src="/assets/crops/0.png" alt="Cactus" title="Cactus"></button>
+                <button type="button" data-selected="false" data-cropid="8" onclick="selectCrop(this)"><img src="/assets/crops/8.png" alt="Cugar Cane" title="Sugar Cane"></button>
+                <button type="button" data-selected="false" data-cropid="5" onclick="selectCrop(this)"><img src="/assets/crops/5.png" alt="Nether Wart" title="Nether Wart"></button>
+            </div>
+    
+            <div class="contestsBox" id="contestsBox">
+                <% contests.forEach(contest => {%>
+                    <div class="contest" id="contest_<%= contest.timestamp %>" data-cropone="<%= contest.crops[0] %>" data-croptwo="<%= contest.crops[1] %>" data-cropthree="<%= contest.crops[2] %>">
+                        <p class="countDown">loading timer ...</p>
+                        <p class="date"><%= contest.timestamp %></p>
+                        <div class="crops">
+                            <img src="/assets/crops/<%= contest.crops[0] %>.png" title="<%= cropNames[contest.crops[0]]%>" alt="<%= cropNames[contest.crops[0]]%>">
+                            <img src="/assets/crops/<%= contest.crops[1] %>.png" title="<%= cropNames[contest.crops[1]]%>" alt="<%= cropNames[contest.crops[1]]%>">
+                            <img src="/assets/crops/<%= contest.crops[2] %>.png" title="<%= cropNames[contest.crops[2]]%>" alt="<%= cropNames[contest.crops[2]]%>">
+                        </div>
+                        <button class="alertBtn" id="alertcontest_<%= contest.timestamp %>" title="get a notification" type="button" onclick="alarmClick('<%= contest.timestamp %>')">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#fefefe"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12 5.5C14.7614 5.5 17 7.73858 17 10.5V12.7396C17 13.2294 17.1798 13.7022 17.5052 14.0683L18.7808 15.5035C19.6407 16.4708 18.954 18 17.6597 18H6.34025C5.04598 18 4.35927 16.4708 5.21913 15.5035L6.4948 14.0683C6.82022 13.7022 6.99998 13.2294 6.99998 12.7396L7 10.5C7 7.73858 9.23858 5.5 12 5.5ZM12 5.5V3M10.9999 21H12.9999" stroke="#fefefe" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                        </button>
                     </div>
-                    <button class="alertBtn" id="alertcontest_<%= contest.timestamp %>" title="get a notification" type="button" onclick="alarmClick('<%= contest.timestamp %>')">
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#fefefe"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12 5.5C14.7614 5.5 17 7.73858 17 10.5V12.7396C17 13.2294 17.1798 13.7022 17.5052 14.0683L18.7808 15.5035C19.6407 16.4708 18.954 18 17.6597 18H6.34025C5.04598 18 4.35927 16.4708 5.21913 15.5035L6.4948 14.0683C6.82022 13.7022 6.99998 13.2294 6.99998 12.7396L7 10.5C7 7.73858 9.23858 5.5 12 5.5ZM12 5.5V3M10.9999 21H12.9999" stroke="#fefefe" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
-                    </button>
-                </div>
-            <%});%>
-            <div class="noContests" id="noContests" style="display: none;">
-                <h3>No contests found</h3>
-                <p>This is probably because it has just been new year in Hypixel Skyblock.</p>
-                <p>The contests will be updated soon.</p>
-            </div>
-        </div>
-    </main>
-
-    <footer>
-        <div class="inner">
-            <div class="column">
-                <a class="flex" href="/">
-                    <img src="/assets/crops/9.png">
-                    <h3>Jacob's Contests Tracker</h3>
-                </a>
-                <span class="by">Made with ❤️ by <a href="https://strassburger.org" target="_blank" rel="noopener noreferrer">KartoffelChips</a></span>
-            </div>
-            <div class="flex lastcolumns">
-                <div class="column">
-                    <h4>Links</h4>
-                    <button class="textBtn" type="button" onclick="toggleModal('aboutModal')">About</button>
-                    <a href="https://github.com/KartoffelChipss/jacob-contests" target="_blank" rel="noopener noreferrer">GitHub</a>
-                </div>
-                <div class="column">
-                    <h4>Legal</h4>
-                    <a href="/impressum">Legal Notice</a>
+                <%});%>
+                <div class="noContests" id="noContests" style="display: none;">
+                    <h3>No contests found</h3>
+                    <p>This is probably because it has just been new year in Hypixel Skyblock.</p>
+                    <p>The contests will be updated soon.</p>
                 </div>
             </div>
-        </div>
-    </footer>
+        </main>
+    
+        <%- include("partials/footer.ejs") %>
+    </div>
 
     <script src="/assets/script.js"></script>
 </body>
