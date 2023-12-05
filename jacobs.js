@@ -125,12 +125,12 @@ app.post("/api/jacobcontests", (req, res) => {
             return;
         }
 
-        if (typeof events !== "object" || Array.isArray(events)) {
-            res.status(400);
-            console.log("[UPLOAD] Invalid contests!")
-            res.send("'contests' must be an array!");
-            return;
-        }
+        // if (typeof events !== "object" || Array.isArray(events)) {
+        //     res.status(400);
+        //     console.log("[UPLOAD] Invalid contests!")
+        //     res.send("'contests' must be an array!");
+        //     return;
+        // }
 
         console.log("[UPLOADS] New events uploaded")
 
@@ -146,7 +146,9 @@ app.post("/api/jacobcontests", (req, res) => {
             res.send('[UPLOADS] Data successfully uploaded');
         });
 
-        fs.writeFile(`./api/archive/${new Date().getTime()}`, events, "utf-8", function (err) {
+        if (!fs.existsSync("./api/archive")) fs.mkdirSync("./api/archive");
+
+        fs.writeFile(`./api/archive/${new Date().getTime()}.json`, events, "utf-8", function (err) {
             if (err) {
                 res.status(500);
                 res.send("[UPLOADS] Could not save archive");
