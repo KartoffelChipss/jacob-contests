@@ -1,0 +1,8 @@
+{
+  "name": "JacobEvent",
+  "entry": "main.js",
+  "description": "get the jacob contests from hypixel skyblock calender",
+  "version": "1.0.0",
+  "author": "Kartoffelhips",
+  "requires": ["requestV2"]
+}

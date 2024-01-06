@@ -4,7 +4,7 @@
   "description": "",
   "main": "jacobs.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node jacobs.js"
   },
   "keywords": [],
   "author": "Kartoffelchips#0445",

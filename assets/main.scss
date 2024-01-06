@@ -174,3 +174,9 @@ main {
         }
     }
 }
+
+.noContests {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

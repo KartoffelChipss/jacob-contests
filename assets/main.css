@@ -139,4 +139,10 @@ main .contestsBox .contest .alertBtn:hover {
   main .contestsBox .contest .alertBtn {
     display: none;
   }
+}
+
+.noContests {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }/*# sourceMappingURL=main.css.map */
