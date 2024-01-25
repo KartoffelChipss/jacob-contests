@@ -481,6 +481,10 @@ nav .inner .rightbox {
 nav .inner .rightbox a {
   color: var(--font-color);
 }
+nav .inner .rightbox a svg {
+  height: 25px;
+  width: 25px;
+}
 @media screen and (max-width: 900px) {
   nav .inner .rightbox {
     display: none;
