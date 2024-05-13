@@ -1,7 +1,14 @@
 const viewsModel = require("../models/viewsmodel");
+const NodeCache = require( "node-cache" );
+const cache = new NodeCache({ stdTTL: 60, checkperiod: 120 });
 
 // Function to get total visits for a specific date range
 async function getTotalVisits(startDate, endDate, route = "/") {
+    const cacheKey = `${route}_${startDate.toISOString()}_${endDate.toISOString()}`;
+    const cachedResult = cache.get(cacheKey);
+
+    if (cachedResult) return cachedResult;
+
     const visits = await viewsModel.aggregate([
         {
             $match: {
@@ -20,7 +27,9 @@ async function getTotalVisits(startDate, endDate, route = "/") {
         }
     ]);
 
-    return visits.length > 0 ? visits[0].totalVisits : 0;
+    const totalVisits = visits.length > 0 ? visits[0].totalVisits : 0;
+    cache.set(cacheKey, totalVisits);
+    return totalVisits;
 }
 
 // Function to get total visits for this year
@@ -75,14 +84,19 @@ async function getTotalVisitsYesterday() {
 }
 
 // Function to get an array of visits per day for the last 30 days
-async function getVisitsLast30Days() {
+async function getVisitsLast30Days(route = "/") {
     const today = new Date();
     const thirtyDaysAgo = new Date(today);
     thirtyDaysAgo.setDate(today.getDate() - 29);
 
+    const cacheKey = `${route}_last_30_days`;
+    const cachedResult = cache.get(cacheKey);
+    if (cachedResult) return cachedResult;
+
     const visits = await viewsModel.aggregate([
         {
             $match: {
+                route,
                 date: {
                     $gte: thirtyDaysAgo,
                     $lte: today
@@ -109,6 +123,7 @@ async function getVisitsLast30Days() {
         result.push({ date: formattedDate, totalVisits });
     }
 
+    cache.set(cacheKey, result);
     return result;
 }
 
