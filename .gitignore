@@ -1,3 +1,7 @@
 **/node_modules
 
 config.json
+
+fakeData.js
+
+.env

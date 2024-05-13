@@ -1,0 +1,41 @@
+@import url("./assets.css");
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+main .inner {
+  --padding: 15px;
+  width: calc(100% - var(--padding) * 2);
+  padding: var(--padding);
+  max-width: 1300px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  margin-bottom: 50px;
+}
+main .statsboxes {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+}
+main .statsboxes .statsbox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  flex-grow: 1;
+  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 0.03);
+}
+main .statsboxes .statsbox .bigNum {
+  font-size: 50px;
+  margin-bottom: 15px;
+}
+main .statsboxes .statsbox .smallText {
+  color: #aaaaaa;
+  font-size: 18px;
+}/*# sourceMappingURL=stats.css.map */

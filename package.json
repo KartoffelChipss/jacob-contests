@@ -1,21 +1,23 @@
 {
-  "name": "jacobs-contests",
-  "version": "1.0.0",
-  "description": "",
-  "main": "jacobs.js",
-  "scripts": {
-    "start": "node jacobs.js"
-  },
-  "keywords": [],
-  "author": "Kartoffelchips#0445",
-  "license": "MIT",
-  "dependencies": {
-    "body-parser": "^1.20.1",
-    "ejs": "^3.1.8",
-    "express": "^4.18.2",
-    "express-rate-limit": "^7.1.5",
-    "fs": "^0.0.1-security",
-    "mongoose": "^6.8.4",
-    "path": "^0.12.7"
-  }
+    "name": "jacobs-contests",
+    "version": "1.0.0",
+    "description": "",
+    "main": "jacobs.js",
+    "scripts": {
+        "start": "node jacobs.js"
+    },
+    "keywords": [],
+    "author": "Kartoffelchips#0445",
+    "license": "MIT",
+    "dependencies": {
+        "body-parser": "^1.20.1",
+        "dotenv": "^16.4.5",
+        "ejs": "^3.1.8",
+        "express": "^4.18.2",
+        "express-rate-limit": "^7.1.5",
+        "express-session": "^1.18.0",
+        "fs": "^0.0.1-security",
+        "mongoose": "^8.3.4",
+        "path": "^0.12.7"
+    }
 }

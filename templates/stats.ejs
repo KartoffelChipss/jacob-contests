@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stats - Jacobs Farming Contests tracker for Hypixel Skyblock</title>
+    <%- include("partials/favicons.ejs") %>
+
+    <meta property="og:title" content="Jacobs Farming Contests tracker for Hypixel Skyblock">
+    <meta property="og:site_name" content="Jacobs Farming Contests">
+    <meta property="og:url" content="https://jacobs.strassburger.dev/">
+    <meta property="og:description" content="This is a tracker to get an overview of the upcoming Jacobs farming contests with the ability to filter by crops. You can get a better overview over all jacobs farming events with the times automatically adjusting to your timezone.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://jacobs.strassburger.dev/assets/img/preview.png">
+
+    <link href="/assets/stats.css" rel="stylesheet">
+</head>
+<body>
+    <!-- <div class="loader"></div> -->
+
+    <%- include("partials/aboutModal.ejs") %>
+
+    <div class="container">
+        <%- include("partials/nav.ejs") %>
+
+        <main>
+            <div class="inner">
+                <div class="statsboxes">
+                    <div class="statsbox">
+                        <span class="bigNum"><%= totalVisitsThisYear.toLocaleString(undefined, { notation: "compact", maximumFractionDigits: 0 }) %></span>
+                        <span class="smallText">Visits this year</span>
+                    </div>
+        
+                    <div class="statsbox">
+                        <span class="bigNum"><%= totalVisitsThisMonth.toLocaleString(undefined, { notation: "compact", maximumFractionDigits: 0 }) %></span>
+                        <span class="smallText">Visits this month</span>
+                    </div>
+        
+                    <div class="statsbox">
+                        <span class="bigNum"><%= totalVisitsToday.toLocaleString(undefined, { notation: "compact", maximumFractionDigits: 0 }) %></span>
+                        <span class="smallText">Visits today</span>
+                    </div>
+                </div>
+        
+                <div class="graph">
+                    <h2>Visits this Month</h2>
+                    <canvas id="monthlyChart" style="width:100%;"></canvas>
+                </div>
+            </div>
+        </main>
+
+        <%- include("partials/footer.ejs") %>
+    </div>
+
+    <script src="/assets/script.js"></script>
+    <script src="/assets/js/chart.min.js"></script>
+    <script src="/assets/js/chart-date-adapter.js"></script>
+    <%if (visitsThisMonth) {%>
+        <script>
+            var visitsThisMonth = <%- JSON.stringify(visitsThisMonth) %>;
+        </script>
+    <%}%>
+    <script src="/assets/js/statspageGraphs.js"></script>
+</body>
+</html>

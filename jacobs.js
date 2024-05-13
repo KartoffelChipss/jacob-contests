@@ -5,6 +5,14 @@ const config = require("./config.json");
 const express = require("express");
 const bodyParser = require("body-parser");
 const rateLimit = require("express-rate-limit");
+const mongoose = require("mongoose");
+const viewsModel = require("./models/viewsmodel");
+const visitsManager = require("./util/manageVisits");
+require("dotenv").config();
+
+const trackStats = config.trackvisits && process.env.MONGO_URI;
+
+if (trackStats) mongoose.connect(process.env.MONGO_URI, {}).then(() => console.log("Connected to database"));
 
 const cropNames = require("./cropnames.json");
 
@@ -24,16 +32,37 @@ app.use(
 );
 
 const limiter = rateLimit({
-	windowMs: 5 * 60 * 1000,// Timewindow is 5 minutes
-	limit: 100,// 100 Requests per "windowMs"
-	standardHeaders: 'draft-7', 
-	legacyHeaders: false,
+    windowMs: 5 * 60 * 1000,// Timewindow is 5 minutes
+    limit: 100,// 100 Requests per "windowMs"
+    standardHeaders: 'draft-7',
+    legacyHeaders: false,
 });
 
-app.use("/api", limiter)
+const trackViews = async (req, res, next) => {
+    try {
+        const route = req.path;
+
+        if (!trackStats) return next();
+
+        if (route !== "/" && route !== "/legalnotice") return next();
+
+        const today = new Date();
+        const date = new Date(today.getFullYear(), today.getMonth(), today.getDate()); // Extracting date portion only
+        let visit = await viewsModel.findOne({ route, date });
+        if (!visit) visit = new viewsModel({ route, date });
+        visit.count++;
+        await visit.save();
+        next();
+    } catch (err) {
+        next(err);
+    }
+};
+
+app.use(trackViews);
+
+app.use("/api", limiter);
 
 app.use("/assets", express.static(path.resolve(`${dataDir}${path.sep}assets`)));
-//app.use("/api", express.static(path.resolve(`${dataDir}${path.sep}api`)));
 
 if (config.developing === false) {
     app.enable('trust proxy');
@@ -41,17 +70,17 @@ if (config.developing === false) {
     console.log("Started in development mode");
 }
 
-app.use(function(request, response, next) {
+app.use(function (request, response, next) {
 
     if (config.developing !== true && !request.secure) {
-       return response.redirect("https://" + request.headers.host + request.url);
+        return response.redirect("https://" + request.headers.host + request.url);
     }
 
     next();
 })
 
 const renderTemplate = (res, req, template, data = {}) => {
-    
+
     const baseData = {
         path: req.path,
     };
@@ -72,7 +101,7 @@ setInterval(() => {
             console.log(err)
         }
         const content = JSON.parse(data);
-    
+
         contests = content;
     });
 }, 5 * 60 * 1000)
@@ -81,6 +110,17 @@ app.get("/", (req, res) => {
     renderTemplate(res, req, "main.ejs", {
         contests,
         cropNames,
+    });
+});
+
+app.get("/stats", async (req, res, next) => {
+    if (!trackStats) return next();
+    
+    renderTemplate(res, req, "stats.ejs", {
+        totalVisitsThisYear: await visitsManager.getTotalVisitsThisYear(),
+        totalVisitsThisMonth: await visitsManager.getTotalVisitsThisMonth(),
+        totalVisitsToday: await visitsManager.getTotalVisitsToday(),
+        visitsThisMonth: await visitsManager.getVisitsLast30Days(),
     });
 });
 

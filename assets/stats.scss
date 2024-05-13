@@ -1,0 +1,48 @@
+@import url("./assets.css");
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+
+    .inner {
+        --padding: 15px;
+        width: calc(100% - var(--padding) * 2);
+        padding: var(--padding);
+        max-width: 1300px;
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
+
+        margin-bottom: 50px;
+    }
+
+    .statsboxes {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 30px;
+
+        .statsbox {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px;
+            flex-grow: 1;
+            border-radius: 12px;
+            background-color: rgba(255, 255, 255, 0.03);
+
+            .bigNum {
+                font-size: 50px;
+                margin-bottom: 15px;
+            }
+
+            .smallText {
+                color: #aaaaaa;
+                font-size: 18px;
+            }
+        }
+    }
+}
