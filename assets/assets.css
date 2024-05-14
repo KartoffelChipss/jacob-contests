@@ -561,6 +561,21 @@ footer .column a:hover, footer .column button:hover {
   cursor: pointer;
   filter: brightness(0.8);
 }
+footer .column .smLinks {
+  display: none;
+  align-items: center;
+  gap: 15px;
+  margin-top: 10px;
+}
+footer .column .smLinks a svg {
+  height: 25px;
+  width: 25px;
+}
+@media screen and (max-width: 900px) {
+  footer .column .smLinks {
+    display: flex;
+  }
+}
 footer .column:first-of-type img {
   height: 30px;
   width: 30px;

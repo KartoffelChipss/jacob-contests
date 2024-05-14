@@ -636,6 +636,22 @@ footer {
             }
         }
 
+        .smLinks {
+            display: none;
+            align-items: center;
+            gap: 15px;
+            margin-top: 10px;
+
+            a svg {
+                height: 25px;
+                width: 25px;
+            }
+
+            @media screen and (max-width: 900px) {
+                display: flex;
+            }
+        }
+
         &:first-of-type {
             img {
                 height: 30px;
