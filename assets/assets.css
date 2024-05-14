@@ -14,6 +14,7 @@
 
 html {
   scroll-behavior: smooth;
+  color-scheme: dark;
 }
 
 body {
@@ -244,6 +245,7 @@ button:focus-visible {
 .cookieBanner .titleBar {
   display: flex;
   align-items: center;
+  gap: 12px;
 }
 .cookieBanner .titleBar img {
   height: 45px;
@@ -251,7 +253,6 @@ button:focus-visible {
 .cookieBanner .titleBar h3 {
   font-size: 26px;
   margin: 0;
-  margin-left: 7px;
 }
 
 .cookieModal {
@@ -465,10 +466,10 @@ nav .inner {
 nav .inner .titlebox {
   display: flex;
   align-items: center;
+  gap: 12px;
 }
 nav .inner .titlebox .logo {
   height: 43px;
-  margin-right: 10px;
 }
 nav .inner .titlebox h1 {
   font-size: 30px;
@@ -495,10 +496,10 @@ nav .inner .rightbox a svg {
     justify-content: center;
     margin-bottom: -30px;
   }
-  nav .inner h1 {
+  nav .inner .titlebox h1 {
     text-align: center;
   }
-  nav .inner .logo {
+  nav .inner .titlebox .logo {
     display: none;
   }
 }
@@ -563,7 +564,7 @@ footer .column a:hover, footer .column button:hover {
 footer .column:first-of-type img {
   height: 30px;
   width: 30px;
-  margin-right: 15px;
+  margin-right: 12px;
 }
 footer .column:first-of-type h3 {
   margin: 0;

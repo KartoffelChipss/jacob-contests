@@ -20,6 +20,7 @@ main .statsboxes {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 30px;
 }
 main .statsboxes .statsbox {
@@ -27,9 +28,11 @@ main .statsboxes .statsbox {
   flex-direction: column;
   align-items: center;
   padding: 30px;
-  flex-grow: 1;
   border-radius: 12px;
   background-color: rgba(255, 255, 255, 0.03);
+  flex: 1;
+  min-width: -moz-fit-content;
+  min-width: fit-content;
 }
 main .statsboxes .statsbox .bigNum {
   font-size: 50px;
@@ -38,4 +41,14 @@ main .statsboxes .statsbox .bigNum {
 main .statsboxes .statsbox .smallText {
   color: #aaaaaa;
   font-size: 18px;
+}
+main .graph {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+@media screen and (max-width: 700px) {
+  main .graph {
+    align-items: center;
+  }
 }/*# sourceMappingURL=stats.css.map */

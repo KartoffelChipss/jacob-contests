@@ -26,6 +26,7 @@
 
 html {
     scroll-behavior: smooth;
+    color-scheme: dark;
 }
 
 body {
@@ -276,6 +277,7 @@ button:focus-visible {
     .titleBar {
         display: flex;
         align-items: center;
+        gap: 12px;
 
         img {
             height: 45px;
@@ -284,7 +286,6 @@ button:focus-visible {
         h3 {
             font-size: 26px;
             margin: 0;
-            margin-left: 7px;
         }
     }
 }
@@ -520,10 +521,10 @@ nav {
         .titlebox {
             display: flex;
             align-items: center;
+            gap: 12px;
 
             .logo {
                 height: 43px;
-                margin-right: 10px;
             }
 
             h1 {
@@ -553,12 +554,14 @@ nav {
         @media screen and (max-width: 900px) {
             justify-content: center;
 
-            h1 {
-                text-align: center;
-            }
+            .titlebox {
+                h1 {
+                    text-align: center;
+                }
 
-            .logo {
-                display: none;
+                .logo {
+                    display: none;
+                }
             }
 
             margin-bottom: -30px;
@@ -637,7 +640,7 @@ footer {
             img {
                 height: 30px;
                 width: 30px;
-                margin-right: 15px;
+                margin-right: 12px;
             }
 
             h3 {
