@@ -10,6 +10,10 @@ const viewsModel = require("./models/viewsmodel");
 const visitsManager = require("./util/manageVisits");
 require("dotenv").config();
 
+const devMode = process.env.DEVMODE === "true";
+
+const visitsBuffer = {};
+
 const trackStats = config.trackvisits && process.env.MONGO_URI;
 
 if (trackStats) mongoose.connect(process.env.MONGO_URI, {}).then(() => console.log("Connected to database"));
@@ -48,15 +52,46 @@ const trackViews = async (req, res, next) => {
 
         const today = new Date();
         const date = new Date(today.getFullYear(), today.getMonth(), today.getDate()); // Extracting date portion only
-        let visit = await viewsModel.findOne({ route, date });
-        if (!visit) visit = new viewsModel({ route, date });
-        visit.count++;
-        await visit.save();
+
+        if (!visitsBuffer[route]) visitsBuffer[route] = {};
+        if (!visitsBuffer[route][date]) visitsBuffer[route][date] = 0;
+
+        visitsBuffer[route][date]++;
+
         next();
     } catch (err) {
         next(err);
     }
 };
+
+const flushVisitsBuffer = async () => {
+    if (devMode) console.log("Flushing visitsBuffer...");
+    const bulkOps = [];
+
+    for (const route in visitsBuffer) {
+        for (const date in visitsBuffer[route]) {
+            const visitCount = visitsBuffer[route][date];
+
+            bulkOps.push({
+                updateOne: {
+                    filter: { route, date: new Date(date) },
+                    update: {
+                        $inc: { count: visitCount }
+                    },
+                    upsert: true
+                }
+            });
+
+            delete visitsBuffer[route][date];
+        }
+    }
+
+    if (bulkOps.length > 0) await viewsModel.bulkWrite(bulkOps);
+
+    if (devMode) console.log("Flushed visitsBuffer")
+}
+
+setInterval(flushVisitsBuffer, 60000);
 
 app.use(trackViews);
 
@@ -115,7 +150,7 @@ app.get("/", (req, res) => {
 
 app.get("/stats", async (req, res, next) => {
     if (!trackStats) return next();
-    
+
     renderTemplate(res, req, "stats.ejs", {
         totalVisitsThisYear: await visitsManager.getTotalVisitsThisYear(),
         totalVisitsThisMonth: await visitsManager.getTotalVisitsThisMonth(),
