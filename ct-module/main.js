@@ -6,7 +6,7 @@ import request from '../requestV2';
 // This is a Chattrigers module!
 
 // Enter your api key, that you set in the config.json of the webserver
-const apiKey = "PUT YOUR KEY HERE!";
+const apiKey = "ENTER API KEY";
 
 // good luck using this lmao
 // open the calendar, press h, go to next page and repeat until you get to the last page
@@ -66,6 +66,9 @@ function scanCalendar(inventory) {
 
                 let match = unformat(lore[i]).match(/Jacob's Farming Contest \((.+)\)/);
                 if (match) {
+                    console.log(lore[i])
+                    console.log("formatted", lore.slice(i + 2, i + 5).map(i => unformat(i).slice(2)))
+                    console.log("---------------------------------------------------------")
                     let time;
 					// console.log(jacobs);
 					// console.log(jacobs.length);
@@ -81,7 +84,7 @@ function scanCalendar(inventory) {
                     }
                     jacobs.push({
                         time,
-                        crops: lore.slice(i + 1, i + 4).map(i => unformat(i).slice(2))
+                        crops: lore.slice(i + 2, i + 5).map(i => unformat(i).slice(2))
                     });
                     break;
                 }
@@ -92,6 +95,7 @@ function scanCalendar(inventory) {
             if (lore.length > 1) {
 
                 console.log(lore)
+                console.log(lore.slice(2, 5).map(i => unformat(i).slice(2)))
 
                 if (unformat(lore[1]).includes('Jacob\'s Farming Contest')) {
                     jacobs.push({
@@ -104,6 +108,7 @@ function scanCalendar(inventory) {
         }
     }
 }
+
 
 register('guiKey', (char, keyCode, gui, event) => {
     if (keyCode === 35) {//h
