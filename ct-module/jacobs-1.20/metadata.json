@@ -1,0 +1,10 @@
+{
+    "name": "JacobEvent",
+    "entry": "main.js",
+    "description": "Scrape the Jacobs Contests from the Hypixel Skyblock Calendar",
+    "version": "1.0.0",
+    "author": "Kartoffelhips",
+    "requires": [
+        "requestV2"
+    ]
+}

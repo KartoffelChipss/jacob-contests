@@ -6,7 +6,7 @@ import request from '../requestV2';
 // This is a Chattrigers module!
 
 // Enter your api key, that you set in the config.json of the webserver
-const apiKey = "ENTER API KEY";
+const apiKey = "ENTER API KEY HERE";
 
 // good luck using this lmao
 // open the calendar, press h, go to next page and repeat until you get to the last page
