@@ -9,6 +9,7 @@ const mongoose = require("mongoose");
 const viewsModel = require("./models/viewsmodel");
 const visitsManager = require("./util/manageVisits");
 require("dotenv").config();
+const getContests = require("./util/getContests");
 
 const devMode = process.env.DEVMODE === "true";
 
@@ -115,7 +116,6 @@ app.use(function (request, response, next) {
 })
 
 const renderTemplate = (res, req, template, data = {}) => {
-
     const baseData = {
         path: req.path,
     };
@@ -126,24 +126,9 @@ const renderTemplate = (res, req, template, data = {}) => {
     );
 };
 
-let contests = require("./api/jacobcontests.json");
-
-setInterval(() => {
-    console.log("Loaded new json file")
-
-    fs.readFile('./api/jacobcontests.json', function read(err, data) {
-        if (err) {
-            console.log(err)
-        }
-        const content = JSON.parse(data);
-
-        contests = content;
-    });
-}, 5 * 60 * 1000)
-
-app.get("/", (req, res) => {
+app.get("/", async (req, res) => {
     renderTemplate(res, req, "main.ejs", {
-        contests,
+        contests: await getContests(config.useSkyHanniApi),
         cropNames,
     });
 });
@@ -164,15 +149,14 @@ app.get("/legalnotice", (req, res) => {
 });
 
 app.get(["/api/jacobcontests", "/api/jacobcontests.json"], (req, res) => {
-    fs.readFile('./api/jacobcontests.json', function read(err, data) {
+    fs.readFile('./api/jacobcontests.json', async function read(err, data) {
         if (err) {
             console.log(err);
             res.send(500);
             res.send("There was an error whilst reading the contests!");
             return;
         }
-        const content = JSON.parse(data);
-        contests = content;
+        const content = await getContests();
 
         // Filter past contents out
         const now = new Date().getTime();

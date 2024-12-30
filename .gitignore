@@ -5,3 +5,5 @@ config.json
 fakeData.js
 
 .env
+
+.idea

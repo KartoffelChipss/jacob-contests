@@ -2,5 +2,6 @@
     "port": "8000",
     "trackvisits": true,
     "apiKey": "xyz",
-    "developing": false
+    "developing": false,
+    "useSkyHanniApi": false
 }
