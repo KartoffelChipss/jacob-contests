@@ -39,6 +39,12 @@
                         <span class="smallText">Visits today</span>
                     </div>
                 </div>
+
+                <div class="statsboxes">
+                    <span class="smallstatsbox"><%= totalVisitsLastYear.toLocaleString(undefined, { notation: "compact", maximumFractionDigits: 0 }) %> Last year</span>
+                    <span class="smallstatsbox"><%= totalVisitsLastMonth.toLocaleString(undefined, { notation: "compact", maximumFractionDigits: 0 }) %> Last Month</span>
+                    <span class="smallstatsbox"><%= totalVisitsYesterday.toLocaleString(undefined, { notation: "compact", maximumFractionDigits: 0 }) %> Yesterday</span>
+                </div>
         
                 <div class="graph">
                     <h2>Visits this Month</h2>

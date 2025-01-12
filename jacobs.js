@@ -141,6 +141,9 @@ app.get("/stats", async (req, res, next) => {
         totalVisitsThisMonth: await visitsManager.getTotalVisitsThisMonth(),
         totalVisitsToday: await visitsManager.getTotalVisitsToday(),
         visitsThisMonth: await visitsManager.getVisitsLast30Days(),
+        totalVisitsLastYear: await visitsManager.getTotalVisitsLastYear(),
+        totalVisitsLastMonth: await visitsManager.getTotalVisitsLastMonth(),
+        totalVisitsYesterday: await visitsManager.getTotalVisitsYesterday(),
     });
 });
 

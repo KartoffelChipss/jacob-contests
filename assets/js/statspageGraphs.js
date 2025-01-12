@@ -19,7 +19,7 @@ const monthlyChartConfig = {
     data: {
         labels: datesArray,
         datasets: [{
-            label: "Views this Month",
+            label: "Visits",
             fill: true,
             backgroundColor: monthGradient,
             borderColor: "#cdb159",

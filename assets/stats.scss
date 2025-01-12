@@ -13,7 +13,6 @@ main {
         max-width: 1300px;
         display: flex;
         flex-direction: column;
-        gap: 50px;
 
         margin-bottom: 50px;
     }
@@ -25,6 +24,10 @@ main {
         justify-content: space-between;
         flex-wrap: wrap;
         gap: 30px;
+
+        &:nth-child(2) {
+            margin-top: 15px;
+        }
 
         .statsbox {
             display: flex;
@@ -47,6 +50,21 @@ main {
                 font-size: 18px;
             }
         }
+
+        .smallstatsbox {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px;
+            border-radius: 12px;
+            background-color: rgba(255, 255, 255, 0.015);
+
+            flex: 1;
+            min-width: fit-content;
+
+            font-size: 20px;
+            color: #aaaaaa;
+        }
     }
 
     .graph {
@@ -54,6 +72,8 @@ main {
 
         display: flex;
         flex-direction: column;
+
+        margin-top: 50px;
 
         @media screen and (max-width: 700px) {
             align-items: center;

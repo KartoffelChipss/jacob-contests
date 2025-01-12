@@ -12,7 +12,6 @@ main .inner {
   max-width: 1300px;
   display: flex;
   flex-direction: column;
-  gap: 50px;
   margin-bottom: 50px;
 }
 main .statsboxes {
@@ -22,6 +21,9 @@ main .statsboxes {
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 30px;
+}
+main .statsboxes:nth-child(2) {
+  margin-top: 15px;
 }
 main .statsboxes .statsbox {
   display: flex;
@@ -42,10 +44,24 @@ main .statsboxes .statsbox .smallText {
   color: #aaaaaa;
   font-size: 18px;
 }
+main .statsboxes .smallstatsbox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 0.015);
+  flex: 1;
+  min-width: -moz-fit-content;
+  min-width: fit-content;
+  font-size: 20px;
+  color: #aaaaaa;
+}
 main .graph {
   width: 100%;
   display: flex;
   flex-direction: column;
+  margin-top: 50px;
 }
 @media screen and (max-width: 700px) {
   main .graph {
