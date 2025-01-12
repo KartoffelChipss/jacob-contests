@@ -191,32 +191,43 @@ app.post("/api/jacobcontests", (req, res) => {
         //     return;
         // }
 
-        console.log("[UPLOADS] New events uploaded")
+        console.log("[UPLOADS] New events uploaded");
 
+        let currentFileWritten = false;
+        let archiveFileWritten = false;
+
+        const checkAndSendResponse = () => {
+            if (currentFileWritten && archiveFileWritten) {
+                console.log("[UPLOADS] All files successfully written");
+                res.send("[UPLOADS] Data successfully uploaded and archived");
+            }
+        };
+    
         fs.writeFile("./api/jacobcontests.json", events, "utf-8", function (err) {
             if (err) {
                 res.status(500);
                 res.send("[UPLOADS] Could not update contests");
                 return console.log(err);
             }
-
-            console.log("[UPLOADS] Updated contests.json")
-            res.status(200);
-            res.send('[UPLOADS] Data successfully uploaded');
+    
+            console.log("[UPLOADS] Updated contests.json");
+            currentFileWritten = true;
+            checkAndSendResponse();
         });
-
+    
         if (!fs.existsSync("./api/archive")) fs.mkdirSync("./api/archive");
-
-        fs.writeFile(`./api/archive/${new Date().getTime()}.json`, events, "utf-8", function (err) {
+    
+        const archiveFileName = `./api/archive/${new Date().getTime()}.json`;
+        fs.writeFile(archiveFileName, events, "utf-8", function (err) {
             if (err) {
                 res.status(500);
                 res.send("[UPLOADS] Could not save archive");
                 return console.log(err);
             }
-
-            console.log(`[UPLOADS] Archived contests in ${new Date().getTime()}.json`)
-            res.status(200);
-            res.send('[UPLOADS] Data successfully archived');
+    
+            console.log(`[UPLOADS] Archived contests in ${archiveFileName}`);
+            archiveFileWritten = true;
+            checkAndSendResponse();
         });
     }
 });
