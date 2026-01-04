@@ -24,16 +24,19 @@
         <main>
             <p>Wich crops do you want to farm?</p>
             <div class="typesBox" id="typesBox">
-                <button type="button" data-selected="false" data-cropid="7" onclick="selectCrop(this)"><img src="/assets/crops/7.png" alt="pumpkin" title="Pumpkins"></button>
-                <button type="button" data-selected="false" data-cropid="3" onclick="selectCrop(this)"><img src="/assets/crops/3.png" alt="melons" title="Melon"></button>
-                <button type="button" data-selected="false" data-cropid="6" onclick="selectCrop(this)"><img src="/assets/crops/6.png" alt="potatoes" title="Potatoes"></button>
-                <button type="button" data-selected="false" data-cropid="1" onclick="selectCrop(this)"><img src="/assets/crops/1.png" alt="carrots" title="Carrots"></button>
-                <button type="button" data-selected="false" data-cropid="9" onclick="selectCrop(this)"><img src="/assets/crops/9.png" alt="wheat" title="Wheat"></button>
-                <button type="button" data-selected="false" data-cropid="2" onclick="selectCrop(this)"><img src="/assets/crops/2.png" alt="COCOA BEANS" title="Cocoa Beans"></button>
-                <button type="button" data-selected="false" data-cropid="4" onclick="selectCrop(this)"><img src="/assets/crops/4.png" alt="Mushrooms" title="Mushrooms"></button>
-                <button type="button" data-selected="false" data-cropid="0" onclick="selectCrop(this)"><img src="/assets/crops/0.png" alt="Cactus" title="Cactus"></button>
-                <button type="button" data-selected="false" data-cropid="8" onclick="selectCrop(this)"><img src="/assets/crops/8.png" alt="Cugar Cane" title="Sugar Cane"></button>
-                <button type="button" data-selected="false" data-cropid="5" onclick="selectCrop(this)"><img src="/assets/crops/5.png" alt="Nether Wart" title="Nether Wart"></button>
+                <button type="button" data-selected="false" data-cropid="7" onclick="selectCrop(this)"><img src="/assets/crops/7.webp" alt="pumpkin" title="Pumpkins"></button>
+                <button type="button" data-selected="false" data-cropid="3" onclick="selectCrop(this)"><img src="/assets/crops/3.webp" alt="melons" title="Melon"></button>
+                <button type="button" data-selected="false" data-cropid="6" onclick="selectCrop(this)"><img src="/assets/crops/6.webp" alt="potatoes" title="Potatoes"></button>
+                <button type="button" data-selected="false" data-cropid="1" onclick="selectCrop(this)"><img src="/assets/crops/1.webp" alt="carrots" title="Carrots"></button>
+                <button type="button" data-selected="false" data-cropid="9" onclick="selectCrop(this)"><img src="/assets/crops/9.webp" alt="wheat" title="Wheat"></button>
+                <button type="button" data-selected="false" data-cropid="2" onclick="selectCrop(this)"><img src="/assets/crops/2.webp" alt="COCOA BEANS" title="Cocoa Beans"></button>
+                <button type="button" data-selected="false" data-cropid="4" onclick="selectCrop(this)"><img src="/assets/crops/4.webp" alt="Mushrooms" title="Mushrooms"></button>
+                <button type="button" data-selected="false" data-cropid="0" onclick="selectCrop(this)"><img src="/assets/crops/0.webp" alt="Cactus" title="Cactus"></button>
+                <button type="button" data-selected="false" data-cropid="8" onclick="selectCrop(this)"><img src="/assets/crops/8.webp" alt="Cugar Cane" title="Sugar Cane"></button>
+                <button type="button" data-selected="false" data-cropid="5" onclick="selectCrop(this)"><img src="/assets/crops/5.webp" alt="Nether Wart" title="Nether Wart"></button>
+                <button type="button" data-selected="false" data-cropid="10" onclick="selectCrop(this)"><img src="/assets/crops/10.webp" alt="Wild Rose" title="Wild Rose"></button>
+                <button type="button" data-selected="false" data-cropid="11" onclick="selectCrop(this)"><img src="/assets/crops/11.webp" alt="Sunflower" title="Sunflower"></button>
+                <button type="button" data-selected="false" data-cropid="12" onclick="selectCrop(this)"><img src="/assets/crops/12.webp" alt="Moonflower" title="Moonflower"></button>                
             </div>
     
             <div class="contestsBox" id="contestsBox">
@@ -42,9 +45,9 @@
                         <p class="countDown">loading timer ...</p>
                         <p class="date"><%= contest.timestamp %></p>
                         <div class="crops">
-                            <img src="/assets/crops/<%= contest.crops[0] %>.png" title="<%= cropNames[contest.crops[0]]%>" alt="<%= cropNames[contest.crops[0]]%>">
-                            <img src="/assets/crops/<%= contest.crops[1] %>.png" title="<%= cropNames[contest.crops[1]]%>" alt="<%= cropNames[contest.crops[1]]%>">
-                            <img src="/assets/crops/<%= contest.crops[2] %>.png" title="<%= cropNames[contest.crops[2]]%>" alt="<%= cropNames[contest.crops[2]]%>">
+                            <img src="/assets/crops/<%= contest.crops[0] %>.webp" title="<%= cropNames[contest.crops[0]]%>" alt="<%= cropNames[contest.crops[0]]%>">
+                            <img src="/assets/crops/<%= contest.crops[1] %>.webp" title="<%= cropNames[contest.crops[1]]%>" alt="<%= cropNames[contest.crops[1]]%>">
+                            <img src="/assets/crops/<%= contest.crops[2] %>.webp" title="<%= cropNames[contest.crops[2]]%>" alt="<%= cropNames[contest.crops[2]]%>">
                         </div>
                         <button class="alertBtn" id="alertcontest_<%= contest.timestamp %>" title="get a notification" type="button" onclick="alarmClick('<%= contest.timestamp %>')">
                             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#fefefe"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12 5.5C14.7614 5.5 17 7.73858 17 10.5V12.7396C17 13.2294 17.1798 13.7022 17.5052 14.0683L18.7808 15.5035C19.6407 16.4708 18.954 18 17.6597 18H6.34025C5.04598 18 4.35927 16.4708 5.21913 15.5035L6.4948 14.0683C6.82022 13.7022 6.99998 13.2294 6.99998 12.7396L7 10.5C7 7.73858 9.23858 5.5 12 5.5ZM12 5.5V3M10.9999 21H12.9999" stroke="#fefefe" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>

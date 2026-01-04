@@ -1,15 +1,18 @@
 const nameIdMap = {
-    "Cactus": 0,
-    "Carrot": 1,
-    "Cocoa Beans": 2,
-    "Melon": 3,
-    "Mushroom": 4,
-    "Nether Wart": 5,
-    "Potato": 6,
-    "Pumpkin": 7,
-    "Sugar Cane": 8,
-    "Wheat": 9
-}
+    Cactus: 0,
+    Carrot: 1,
+    'Cocoa Beans': 2,
+    Melon: 3,
+    Mushroom: 4,
+    'Nether Wart': 5,
+    Potato: 6,
+    Pumpkin: 7,
+    'Sugar Cane': 8,
+    Wheat: 9,
+    'Wild Rose': 10,
+    Sunflower: 11,
+    Moonflower: 12,
+};
 
 /**
  * @typedef {Object} Contest
@@ -23,18 +26,19 @@ const nameIdMap = {
  * @return {Promise<Contest[]>} - The contests
  */
 async function getContests(skyhannyApi = true) {
-    if (!skyhannyApi) return require("../api/jacobcontests.json");
+    if (!skyhannyApi) return require('../api/jacobcontests.json');
 
-    console.log("Fetching contests from Skyhanny API");
+    console.log('Fetching contests from Skyhanny API');
 
-    const response = await fetch("https://api.elitebot.dev/contests/at/now");
+    const response = await fetch('https://api.elitebot.dev/contests/at/now');
     const data = await response.json();
 
     const contests = data.contests;
 
-    const formattedContests = Object.keys(contests).map(timestamp => ({
+    const formattedContests = Object.keys(contests).map((timestamp) => ({
         timestamp: parseInt(timestamp) * 1000,
-        crops: contests[timestamp].map(crop => nameIdMap[crop])
+        crops: contests[timestamp].map((crop) => nameIdMap[crop]),
+        cropNames: contests[timestamp],
     }));
 
     return formattedContests;
