@@ -6,14 +6,10 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const rateLimit = require('express-rate-limit');
 const mongoose = require('mongoose');
-const viewsModel = require('./models/viewsmodel');
-const visitsManager = require('./util/manageVisits');
 require('dotenv').config();
 const getContests = require('./util/getContests');
 
 const devMode = process.env.DEVMODE === 'true';
-
-const visitsBuffer = {};
 
 const trackStats = config.trackvisits && process.env.MONGO_URI;
 
@@ -43,59 +39,6 @@ const limiter = rateLimit({
     standardHeaders: 'draft-7',
     legacyHeaders: false,
 });
-
-const trackViews = async (req, res, next) => {
-    try {
-        const route = req.path;
-
-        if (!trackStats) return next();
-
-        if (route !== '/' && route !== '/legalnotice') return next();
-
-        const today = new Date();
-        const date = new Date(today.getFullYear(), today.getMonth(), today.getDate()); // Extracting date portion only
-
-        if (!visitsBuffer[route]) visitsBuffer[route] = {};
-        if (!visitsBuffer[route][date]) visitsBuffer[route][date] = 0;
-
-        visitsBuffer[route][date]++;
-
-        next();
-    } catch (err) {
-        next(err);
-    }
-};
-
-const flushVisitsBuffer = async () => {
-    if (devMode) console.log('Flushing visitsBuffer...');
-    const bulkOps = [];
-
-    for (const route in visitsBuffer) {
-        for (const date in visitsBuffer[route]) {
-            const visitCount = visitsBuffer[route][date];
-
-            bulkOps.push({
-                updateOne: {
-                    filter: { route, date: new Date(date) },
-                    update: {
-                        $inc: { count: visitCount },
-                    },
-                    upsert: true,
-                },
-            });
-
-            delete visitsBuffer[route][date];
-        }
-    }
-
-    if (bulkOps.length > 0) await viewsModel.bulkWrite(bulkOps);
-
-    if (devMode) console.log('Flushed visitsBuffer');
-};
-
-setInterval(flushVisitsBuffer, 60000);
-
-app.use(trackViews);
 
 app.use('/api', limiter);
 
@@ -127,20 +70,6 @@ app.get('/', async (req, res) => {
     renderTemplate(res, req, 'main.ejs', {
         contests: await getContests(config.useSkyHanniApi),
         cropNames,
-    });
-});
-
-app.get('/stats', async (req, res, next) => {
-    if (!trackStats) return next();
-
-    renderTemplate(res, req, 'stats.ejs', {
-        totalVisitsThisYear: await visitsManager.getTotalVisitsThisYear(),
-        totalVisitsThisMonth: await visitsManager.getTotalVisitsThisMonth(),
-        totalVisitsToday: await visitsManager.getTotalVisitsToday(),
-        visitsThisMonth: await visitsManager.getVisitsLast30Days(),
-        totalVisitsLastYear: await visitsManager.getTotalVisitsLastYear(),
-        totalVisitsLastMonth: await visitsManager.getTotalVisitsLastMonth(),
-        totalVisitsYesterday: await visitsManager.getTotalVisitsYesterday(),
     });
 });
 
