@@ -78,15 +78,21 @@ app.get('/legalnotice', (req, res) => {
 });
 
 app.get(['/api/jacobcontests', '/api/jacobcontests.json'], async (req, res) => {
-    const content = await getContests();
+    try {
+        const content = await getContests(config.useSkyHanniApi);
 
-    // Filter past contents out
-    const now = new Date().getTime();
-    const twentyMin = 20 * 60 * 1000; // A contest lasts 20 minutes
-    const trimmedcontent = content.filter((c) => c.timestamp >= now - twentyMin);
+        // Filter past contents out
+        const now = new Date().getTime();
+        const twentyMin = 20 * 60 * 1000; // A contest lasts 20 minutes
+        const trimmedcontent = content.filter((c) => c.timestamp >= now - twentyMin);
 
-    res.status(200);
-    res.send(trimmedcontent);
+        res.status(200);
+        res.send(trimmedcontent);
+    } catch (err) {
+        console.error('Error fetching contests:', err);
+        res.status(500);
+        res.send('There was an error whilst reading the contests!');
+    }
 });
 
 app.post('/api/jacobcontests', (req, res) => {

@@ -1,9 +1,6 @@
 **/node_modules
-
 config.json
-
 fakeData.js
-
 .env
-
 .idea
+api/jacobcontests.json
